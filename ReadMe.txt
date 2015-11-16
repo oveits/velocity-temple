@@ -1,8 +1,7 @@
 RESTful Velocity Template Engine
 ================================
 
-This is a RESTful Template Engine for Velocity templates. It can create, read, update and delete and evaluate stored templates, i.e. apply velocity template semantics on stored templates.
-Alternatively, it can also be used to evaluate a template received in a HTTP Body.
+This is a RESTful Template Engine for Velocity templates based on the new REST DSL of Apache Camel (available as of 2.14.0). It can create, read, update and delete and evaluate stored templates, i.e. apply velocity template semantics on stored templates or on templates that are sent in the body of the request.
 
 To build this project use
 
@@ -16,9 +15,10 @@ To run this project from jar use (tested with jdk1.7.0_09):
 
     java.exe -jar camel-spring2.jar
     
-The Server Port can be configured in the file
-  
-    properties/velocity-template-temple.properties
+The Server Port can be configured in the file properties/velocity-template-temple.properties:
+    
+    e.g.
+    inputport=80
 
 Functions:
 ==========
