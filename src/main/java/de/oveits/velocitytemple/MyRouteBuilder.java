@@ -50,6 +50,9 @@ public class MyRouteBuilder extends RouteBuilder {
 		// List
 			.get() 
 			.route().pipeline("direct:before", "direct:listTemplates", "direct:after").endRest()
+		// Apply Velocity from Body
+			.post()
+			.route().pipeline("direct:before", "direct:applyTemplateFromBody", "direct:after").endRest()
 		// Read as text:
 			.get("/{templateName}") // Read
 			.route().pipeline("direct:before", "direct:readTemplate", "direct:after").endRest()
@@ -69,6 +72,13 @@ public class MyRouteBuilder extends RouteBuilder {
 			.delete("/{templateName}")
 			.route().pipeline("direct:before", "direct:deleteTemplate", "direct:after").endRest()
 		;
+		
+//		// define REST service:
+//		rest("/ssh")
+//		// Apply Velocity
+//			.get("/{templateName}/apply")
+//			.route().pipeline("direct:before", "direct:applySSH", "direct:after").endRest()
+//		;
 		
 		from("direct:before")
 		// default settings:
@@ -93,13 +103,14 @@ public class MyRouteBuilder extends RouteBuilder {
 //		.setHeader("Content-Type", constant("text/html; charset=UTF-8"))
 //		;
 
-	    	    
-
-		// testing of recursive routingSlip; not yet implemented:
-//	    from("jetty:http://0.0.0.0:{{inputport}}/routingSlip/") //?continuationTimeout=3600000")
-//		.routeId("routingSlip")
-//    	.routingSlip(header("routingSlip"))
-//	;
+	    Boolean allowRoutingSlip=false;	    
+		if(allowRoutingSlip){
+			// testing of recursive routingSlip; not yet implemented:
+		    from("jetty:http://0.0.0.0:{{inputport}}/routingSlip/") //?continuationTimeout=3600000")
+				.routeId("routingSlip")
+		    	.routingSlip(header("routingSlip"))
+			;
+		}
 //		
 //	    from("direct:routingSlip")
 //	    .routeId("routingSlip")
@@ -325,6 +336,13 @@ public class MyRouteBuilder extends RouteBuilder {
 			.to("velocity:dummy")
 		;
 		
+//		direct:applyTemplateFromBody
+		from("direct:applyTemplateFromBody")
+			.routeId("direct:applyTemplateFromBody")
+			.convertBodyTo(String.class)
+			.setHeader("CamelVelocityTemplate", simple("${body}"))
+			.to("velocity:dummy")
+		;
 		// not used yet:
 //		from("direct:velocityFromUriInBody")
 //			.convertBodyTo(String.class)
@@ -352,6 +370,24 @@ public class MyRouteBuilder extends RouteBuilder {
 //		from("direct:sleep")
 //			.bean(Sleep.class)
 //			;
+		
+//		from("direct:applySSH")
+//		.routeId("applySSH")
+////		.log("direct:applyTemplate ended with template=${headers.templateName}")
+//		.to("ssh:username:password@host:port")
+////		.choice().when(header("resolution").isEqualTo("forced"))
+////			.doTry()
+////				.bean(VerifyData.class, "verifyTemplateAfter")
+////				.setHeader("CamelHttpResponseCode", constant("200"))
+////			    .setHeader("Location", simple("${headers.CamelHttpUrl}"))
+////			.doCatch(Exception.class)
+////				.setHeader("CamelHttpResponseCode", constant("404"))
+////			    .setHeader("Location", simple("${headers.CamelHttpUrl}"))
+////				.setBody(simple("404 header(s) not found: ${exception.message} (unrecoverable since resolution was set to forced)."))
+////			.endDoTry()			
+////		.end()
+////		.log("direct:applyTemplate ended with template=${headers.templateName}")			
+//	;
         	
 
     }

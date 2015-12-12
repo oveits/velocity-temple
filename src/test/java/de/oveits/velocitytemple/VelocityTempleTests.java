@@ -270,7 +270,28 @@ public class VelocityTempleTests extends CamelTestSupport {
         MockEndpoint mock = getMockEndpoint("mock:result");
         Map<String,Object> headers = new HashMap<String,Object>();
         String body;
+
+        //
+        // apply template from body:
+        //
+        mock.reset();
+        headers = new HashMap<String,Object>();
         
+        // expectations need to be defined before sending the message:
+        mock.expectedMessageCount(1);
+        mock.expectedBodiesReceived("Hello London");
+        mock.expectedHeaderReceived("CamelHttpResponseCode", "200");
+        mock.expectedHeaderReceived("Location", null);
+
+        headers.put("recipientList", "http://localhost:2005/templates");
+        headers.put("CamelHttpMethod", "POST");
+        headers.put("name", "London");
+        body = "Hello ${headers.name}";
+
+        template.sendBodyAndHeaders("direct:recipientList", body, headers); 
+
+        mock.assertIsSatisfied();
+
         //
         // apply template, when template does not exist (cached=false; otherwise, we need to restart the routes):
         //
