@@ -1,7 +1,7 @@
 RESTful Velocity Template Engine
 ================================
 
-This is a RESTful Template Engine for Velocity templates based on the new REST DSL of Apache Camel (available as of 2.14.0). It can create, read, update and delete and evaluate stored templates, i.e. apply velocity template semantics on stored templates or on templates that are sent in the body of the request.
+This is a RESTful Template Engine for Velocity templates based on the new REST DSL of Apache Camel (available as of 2.14.0). It can create, read, update and delete and evaluate velocity templates, i.e. it can apply velocity template semantics on stored templates or on templates that are sent in the body of the request.
 
 To build this project use
 
