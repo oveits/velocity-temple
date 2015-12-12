@@ -51,7 +51,7 @@ public class MyRouteBuilder extends RouteBuilder {
 			.get() 
 			.route().pipeline("direct:before", "direct:listTemplates", "direct:after").endRest()
 		// Apply Velocity from Body
-			.post()
+			.post("/apply")
 			.route().pipeline("direct:before", "direct:applyTemplateFromBody", "direct:after").endRest()
 		// Read as text:
 			.get("/{templateName}") // Read

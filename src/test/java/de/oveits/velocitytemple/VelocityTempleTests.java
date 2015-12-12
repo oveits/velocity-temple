@@ -283,7 +283,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         mock.expectedHeaderReceived("CamelHttpResponseCode", "200");
         mock.expectedHeaderReceived("Location", null);
 
-        headers.put("recipientList", "http://localhost:2005/templates");
+        headers.put("recipientList", "http://localhost:2005/templates/apply");
         headers.put("CamelHttpMethod", "POST");
         headers.put("name", "London");
         body = "Hello ${headers.name}";
