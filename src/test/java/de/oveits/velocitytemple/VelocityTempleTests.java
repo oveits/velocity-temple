@@ -281,11 +281,34 @@ public class VelocityTempleTests extends CamelTestSupport {
         mock.expectedMessageCount(1);
         mock.expectedBodiesReceived("Hello London");
         mock.expectedHeaderReceived("CamelHttpResponseCode", "200");
-        mock.expectedHeaderReceived("Location", null);
+        mock.expectedHeaderReceived("Location", "http://localhost:2005/templates/apply");
 
         headers.put("recipientList", "http://localhost:2005/templates/apply");
         headers.put("CamelHttpMethod", "POST");
         headers.put("name", "London");
+        body = "Hello ${headers.name}";
+
+        template.sendBodyAndHeaders("direct:recipientList", body, headers); 
+
+        mock.assertIsSatisfied();
+
+        //
+        // apply template from body with a variable that is not defined and resolution=forced
+        //
+        mock.reset();
+        headers = new HashMap<String,Object>();
+        
+        // expectations need to be defined before sending the message:
+        mock.expectedMessageCount(1);
+        mock.expectedBodiesReceived("404 header(s) not found: Could not resolve following parameters in velocity script: headers.name (unrecoverable since resolution was set to forced).");
+        mock.expectedHeaderReceived("CamelHttpResponseCode", "404");
+        mock.expectedHeaderReceived("Location", "http://localhost:2005/templates/apply");
+
+        headers.put("recipientList", "http://localhost:2005/templates/apply?throwExceptionOnFailure=false");
+        headers.put("CamelHttpMethod", "POST");
+        headers.put("resolution", "forced");
+        // name is missing (therefore we expect that we get a 404 response) : 
+        // headers.put("name", "London");
         body = "Hello ${headers.name}";
 
         template.sendBodyAndHeaders("direct:recipientList", body, headers); 

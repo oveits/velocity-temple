@@ -27,7 +27,7 @@ Apply template that is found in the body:
 	send a POST to http://<server>:<port>/templates/apply with the template in the body and the variables in the header.
 	Response Codes: 200 OK, if the operation was successful.
 	-> This operation can be used as a stateless microservice.
-	Optional parameter: verifyTemplateAfter=true/false (default: false). Will cause an exit code 404 (Header) not found, if one of the variables in the template could not be resolved; i.e. if there is variable in the body that is missing in the header. 
+	Optional parameter: resolution=forced (default: undefined/null). Will cause an exit code 404 (Header) not found, if one of the variables in the template could not be resolved; i.e. if there is variable in the body that is missing in the header. 
 	
 Apply template named "mytemplate":
 	send a POST to http://<server>:<port>/templates/mytemplate/apply with the variables in the header.
@@ -36,7 +36,7 @@ Apply template named "mytemplate":
 Create a template named "mytemplate": 
 	send a POST to http://<server>:<port>/templates/mytemplate with the template content in the HTTP body.
 	Response Codes: 201, if successfully created; 409, if it exists already.
-	Optional parameter: verifyTemplateAfter=true/false (default: false). Will cause an exit code 404 (Header) Not Found, if one of the variables in the template could not be resolved; i.e. if there is variable in the template file that is missing in the header. 
+	Optional parameter: resolution=forced (default: undefined/null). Will cause an exit code 404 (Header) Not Found, if one of the variables in the template could not be resolved; i.e. if there is variable in the template file that is missing in the header. 
 
 Read template named "mytemplate": 
 	send a GET to http://<server>:<port>/templates/mytemplate. The template will be received in the body.

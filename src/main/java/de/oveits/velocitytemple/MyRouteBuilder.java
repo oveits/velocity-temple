@@ -27,8 +27,8 @@ public class MyRouteBuilder extends RouteBuilder {
 //				.setHeader("Content-Type", constant("application/x-www-form-urlencoded"))
 				.setHeader("Content-Type", constant("text/html"))
 //				.setHeader("Content-Type", constant("text/plain"))
-				
-				.handled(false).end();
+				.handled(false)
+				.end();
     	
     	//
 		// MAIN ROUTES
@@ -342,6 +342,16 @@ public class MyRouteBuilder extends RouteBuilder {
 			.convertBodyTo(String.class)
 			.setHeader("CamelVelocityTemplate", simple("${body}"))
 			.to("velocity:dummy")
+			.setHeader("CamelHttpResponseCode", constant("200"))
+		    .setHeader("Location", simple("${headers.CamelHttpUrl}"))
+			.choice().when(header("resolution").isEqualTo("forced"))
+				.doTry()
+					.bean(VerifyData.class, "verifyTemplateAfter")
+				.doCatch(Exception.class)
+					.setHeader("CamelHttpResponseCode", constant("404"))
+					.setBody(simple("404 header(s) not found: ${exception.message} (unrecoverable since resolution was set to forced)."))
+				.endDoTry()			
+			.end()
 		;
 		// not used yet:
 //		from("direct:velocityFromUriInBody")
