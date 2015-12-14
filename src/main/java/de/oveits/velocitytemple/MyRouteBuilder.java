@@ -44,6 +44,13 @@ public class MyRouteBuilder extends RouteBuilder {
 
     	// define source interfaces and port:
 		restConfiguration().host("0.0.0.0").port("{{inputport}}");
+
+		// define REST service:
+		rest("/ssh")
+		// Apply Velocity
+			.post()
+			.route().pipeline("direct:before", "direct:ssh", "direct:after").endRest()
+		;
 		
 		// define REST service:
 		rest("/templates")
@@ -73,12 +80,7 @@ public class MyRouteBuilder extends RouteBuilder {
 			.route().pipeline("direct:before", "direct:deleteTemplate", "direct:after").endRest()
 		;
 		
-//		// define REST service:
-//		rest("/ssh")
-//		// Apply Velocity
-//			.get("/{templateName}/apply")
-//			.route().pipeline("direct:before", "direct:applySSH", "direct:after").endRest()
-//		;
+
 		
 		from("direct:before")
 		// default settings:
@@ -162,7 +164,7 @@ public class MyRouteBuilder extends RouteBuilder {
 		
 		from("direct:createTemplate")
 			.routeId("createTemplate")
-//			.log("direct:createTemplate started with template=${headers.templateName}")
+			.log("direct:createTemplate started with template=${headers.templateName}")
 			.setHeader(Exchange.FILE_NAME, simple("${headers.templateName}"))
 			.to("direct:verifyTemplateName")
 			.doTry()
@@ -175,7 +177,7 @@ public class MyRouteBuilder extends RouteBuilder {
 				.setHeader("Location", simple("${headers.CamelHttpUrl}"))
 				.setBody(simple("Template ${headers.templateName} exists already: href=${headers.CamelHttpUrl}"))
 			.endDoTry()			
-//			.log("direct:createTemplate ended with template=${headers.templateName}")
+			.log("direct:createTemplate ended with template=${headers.templateName}")
 		;
 		
 		from("direct:listTemplates")	
@@ -381,23 +383,52 @@ public class MyRouteBuilder extends RouteBuilder {
 //			.bean(Sleep.class)
 //			;
 		
-//		from("direct:applySSH")
-//		.routeId("applySSH")
-////		.log("direct:applyTemplate ended with template=${headers.templateName}")
-//		.to("ssh:username:password@host:port")
-////		.choice().when(header("resolution").isEqualTo("forced"))
-////			.doTry()
-////				.bean(VerifyData.class, "verifyTemplateAfter")
-////				.setHeader("CamelHttpResponseCode", constant("200"))
-////			    .setHeader("Location", simple("${headers.CamelHttpUrl}"))
-////			.doCatch(Exception.class)
-////				.setHeader("CamelHttpResponseCode", constant("404"))
-////			    .setHeader("Location", simple("${headers.CamelHttpUrl}"))
-////				.setBody(simple("404 header(s) not found: ${exception.message} (unrecoverable since resolution was set to forced)."))
-////			.endDoTry()			
-////		.end()
-////		.log("direct:applyTemplate ended with template=${headers.templateName}")			
-//	;
+		from("direct:ssh")
+		// input headers: username, password, hostname, port 
+		// input body: STDIN (shell commands)
+		// response headers: STDIN, STDOUT, STRERR
+		// response body: STDIN + STDOUT + STERR
+		.onException(Exception.class)
+			.convertBodyTo(String.class).bean(MyExceptionHandler.class)
+			.handled(true)
+			.choice()
+				.when(body().contains("Failed to authenticate")).setHeader("CamelHttpResponseCode", constant("401"))
+				.when(body().contains("Failed to connect")).setHeader("CamelHttpResponseCode", constant("404"))
+			.end()			
+		.end()
+		.routeId("ssh")
+		.log("direct:ssh: ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers:port} started")			
+		//
+		// validation:
+		//
+		.choice().when(header("username").isNull()).throwException(new RuntimeException("direct:ssh: username must not be null!")).end()
+		.choice().when(header("hostname").isNull()).throwException(new RuntimeException("direct:ssh: hostname must not be null!")).end()
+		.choice().when(header("password").isNull()).throwException(new RuntimeException("direct:ssh: password must not be null!")).end()
+		//
+		// default values:
+		//
+		.choice().when(header("port").isNull()).setHeader("port", constant(22)).end()
+		//
+		// perform SSH:
+		//
+		//
+		// collect STDIN:
+		//
+		.convertBodyTo(String.class)
+		.setHeader("STDIN", simple("${body}"))
+		.recipientList(simple("ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers.port}"))
+		//
+		// collect results:
+		//
+		.setHeader("Location", simple("${headers.CamelHttpUrl}"))
+		.convertBodyTo(String.class)
+		.setHeader("STDOUT", simple("${body}"))
+		.setHeader("STDERR", simple("STDERR: ${headers.CamelSshStderr}")).setHeader("STDERR", simple("${headers.STDERR.replace('STDERR: ','')}"))
+		//
+		.setBody(simple("STDIN:\n${headers.STDIN}\n\nSTDOUT:\n${headers.STDOUT}\n\nSTDERR:\n${headers.STDERR}"))
+		//
+		.log("direct:ssh: ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers:port} ended")			
+	;
         	
 
     }
