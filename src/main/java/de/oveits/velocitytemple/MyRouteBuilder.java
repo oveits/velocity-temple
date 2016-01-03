@@ -2,6 +2,7 @@ package de.oveits.velocitytemple;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.camel.builder.PredicateBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.properties.PropertiesComponent;
 
@@ -384,7 +385,7 @@ public class MyRouteBuilder extends RouteBuilder {
 //			;
 		
 		from("direct:ssh")
-		// input headers: username, password, hostname, port 
+		// input headers: username, password, hostname, port, format (e.g. '<STDOUT>\n\nSTDIN: <STDIN>')
 		// input body: STDIN (shell commands)
 		// response headers: no additions (STDIN, STDOUT, STRERR are avoided/removed, so the headers do not grow too large)
 		// response body: STDOUT and only in case STDERR is not null, we add STDERR and STDIN
@@ -429,15 +430,40 @@ public class MyRouteBuilder extends RouteBuilder {
 		// debugging (for developers):
 		.choice().when(header("mxcvbaeogperoug").isNotNull()).throwException(new Exception("--------------mxcvbaeogperoug-----------")).end()
 		//
+		// Format defaults:		
 		.choice()
-//			.when(header("format").isNotNull())
-//				.setBody(simple(simple("${headers.format}").toString()))				
-			.when(header("STDERR").isNotEqualTo(""))
-			// if there was an error, append the error and the input:
-				.setBody(simple("${headers.STDOUT}\n\nSTDERR:\n${headers.STDERR}\n\nSTDIN:\n${headers.STDIN}"))
+			.when(header("format").isNull()) 
+				// format is not user-defined, so set the defaults:
+				// default.format = "<STDOUT>\n"
+				// default.formatOnError = "<STDOUT>\n\nSTDERR:\n<STDERR>\n\nSTDIN:\n<STDIN>"
+				.setHeader("format", simple("{{default.format}}"))
+				.setHeader("formatOnError", simple("{{default.formatOnError}}"))
+			.when(header("formatOnError").isNull())
+				// format is user-defined, but formatOnError is not user-defined, 
+				// so we assume that we always use the user-defined format
+				.setHeader("formatOnError", simple("${headers.format}"))
+			// otherwise keep the user-defined format and formatOnError
 		.end()
+		//
+		// Redefine format depending on whether the SSH session has returned an error (STDERR) or not
+		.choice()
+			.when(header("STDERR").isEqualTo(""))
+			// no error present in SSH session
+				.setHeader("format", simple("${headers.format}"))
+			.otherwise()
+			// errors present in SSH session
+				.setHeader("format", simple("${headers.formatOnError}"))
+		.end()
+		//
+		// apply format
+		.setBody(simple("${headers.format}"))
+		// replacing '\n' by real linebreaks (did not find another way than to perform it with 2 replaceAlls and another replaceAll to retain the '\'):
+		.setBody(simple("${body.replaceAll('\\\\','__NN__').replaceAll('__NN__n','\n').replaceAll('__NN__','\\\\')}"))
+		.setBody(simple("${body.replaceAll('<STDOUT>','headers.STDOUT').replaceAll('<STDIN>','headers.STDIN').replaceAll('<STDERR>','headers.STDERR')}"))
+
 		// we need to remove STDIN (STDOUT + STDERR if they are not null) again, so the headers do not grow too large; otherwise this could cause a 500 error.
-		.removeHeaders("STDIN|STDOUT|STDERR")
+		.removeHeaders("STDIN|STDOUT|STDERR|format|formatOnError|hostname|port|username|password")
+		.removeHeaders(".*", "Location")
 		//
 		.log("direct:ssh: ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers:port} ended")			
 	;
