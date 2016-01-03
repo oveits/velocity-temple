@@ -415,23 +415,26 @@ public class MyRouteBuilder extends RouteBuilder {
 		// collect STDIN:
 		//
 		.convertBodyTo(String.class)
-		.setHeader("STDIN", simple("${body}"))
+		.setHeader("STDIN", simple("${body.trim()}"))
 		.recipientList(simple("ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers.port}"))
 		//
 		// collect results:
 		//
 		.setHeader("Location", simple("${headers.CamelHttpUrl}"))
 		.convertBodyTo(String.class)
-//		.setHeader("STDOUT", simple("${body}"))
-//		.setHeader("STDERR", simple("STDERR: ${headers.CamelSshStderr}")).setHeader("STDERR", simple("${headers.STDERR.replace('STDERR: ','')}"))
+		.setHeader("STDOUT", simple("${body.trim()}"))
+		// non-white characters __ needed in order to read String from CamelSshStderr stream: 
+		.setHeader("STDERR", simple("__${headers.CamelSshStderr}__")).setHeader("STDERR", simple("${headers.STDERR.replaceAll('^__|__$', '').trim()}"))
 		//
-		// debugging:
+		// debugging (for developers):
 		.choice().when(header("mxcvbaeogperoug").isNotNull()).throwException(new Exception("--------------mxcvbaeogperoug-----------")).end()
 		//
 		.choice()
-			.when(header("STDERR").isNotEqualTo(" "))
+//			.when(header("format").isNotNull())
+//				.setBody(simple(simple("${headers.format}").toString()))				
+			.when(header("STDERR").isNotEqualTo(""))
 			// if there was an error, append the error and the input:
-				.setBody(simple("${body}STDERR:\n${headers.CamelSshStderr}STDIN:\n${headers.STDIN}"))
+				.setBody(simple("${headers.STDOUT}\n\nSTDERR:\n${headers.STDERR}\n\nSTDIN:\n${headers.STDIN}"))
 		.end()
 		// we need to remove STDIN (STDOUT + STDERR if they are not null) again, so the headers do not grow too large; otherwise this could cause a 500 error.
 		.removeHeaders("STDIN|STDOUT|STDERR")
