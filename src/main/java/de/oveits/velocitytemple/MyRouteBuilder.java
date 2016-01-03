@@ -384,30 +384,30 @@ public class MyRouteBuilder extends RouteBuilder {
 //			;
 		
 		from("direct:ssh")
-		// input headers: username, password, hostname, port (default:22) 
+		// input headers: username, password, hostname, port 
 		// input body: STDIN (shell commands)
-		// response headers: STDIN, STDOUT, STRERR
-		// response body: STDIN + STDOUT + STERR
+		// response headers: no additions (STDIN, STDOUT, STRERR are avoided/removed, so the headers do not grow too large)
+		// response body: STDOUT and only in case STDERR is not null, we add STDERR and STDIN
 		.onException(Exception.class)
 			.convertBodyTo(String.class).bean(MyExceptionHandler.class)
 			.handled(true)
 			.choice()
 				.when(body().contains("Failed to authenticate")).setHeader("CamelHttpResponseCode", constant("401"))
 				.when(body().contains("Failed to connect")).setHeader("CamelHttpResponseCode", constant("404"))
-			.end()			
-		.end()
-		.routeId("ssh")
+			.end() // choice		
+		.end() // onException	
+		.routeId("direct:ssh")
 		.log("direct:ssh: ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers:port} started")			
 		//
 		// validation:
 		//
-		.choice().when(header("username").isNull()).throwException(new RuntimeException("direct:ssh: username must not be null!")).end()
-		.choice().when(header("hostname").isNull()).throwException(new RuntimeException("direct:ssh: hostname must not be null!")).end()
-		.choice().when(header("password").isNull()).throwException(new RuntimeException("direct:ssh: password must not be null!")).end()
+		.choice().when(header("username").isNull()).throwException(new RuntimeException("direct:ssh: username must not be null!")).end() // choice
+		.choice().when(header("hostname").isNull()).throwException(new RuntimeException("direct:ssh: hostname must not be null!")).end() // choice
+		.choice().when(header("password").isNull()).throwException(new RuntimeException("direct:ssh: password must not be null!")).end() // choice
 		//
 		// default values:
 		//
-		.choice().when(header("port").isNull()).setHeader("port", constant(22)).end()
+		.choice().when(header("port").isNull()).setHeader("port", constant(22)).end() // choice
 		//
 		// perform SSH:
 		//
@@ -422,10 +422,19 @@ public class MyRouteBuilder extends RouteBuilder {
 		//
 		.setHeader("Location", simple("${headers.CamelHttpUrl}"))
 		.convertBodyTo(String.class)
-		.setHeader("STDOUT", simple("${body}"))
-		.setHeader("STDERR", simple("STDERR: ${headers.CamelSshStderr}")).setHeader("STDERR", simple("${headers.STDERR.replace('STDERR: ','')}"))
+//		.setHeader("STDOUT", simple("${body}"))
+//		.setHeader("STDERR", simple("STDERR: ${headers.CamelSshStderr}")).setHeader("STDERR", simple("${headers.STDERR.replace('STDERR: ','')}"))
 		//
-		.setBody(simple("STDIN:\n${headers.STDIN}\n\nSTDOUT:\n${headers.STDOUT}\n\nSTDERR:\n${headers.STDERR}"))
+		// debugging:
+		.choice().when(header("mxcvbaeogperoug").isNotNull()).throwException(new Exception("--------------mxcvbaeogperoug-----------")).end()
+		//
+		.choice()
+			.when(header("STDERR").isNotEqualTo(" "))
+			// if there was an error, append the error and the input:
+				.setBody(simple("${body}STDERR:\n${headers.CamelSshStderr}STDIN:\n${headers.STDIN}"))
+		.end()
+		// we need to remove STDIN (STDOUT + STDERR if they are not null) again, so the headers do not grow too large; otherwise this could cause a 500 error.
+		.removeHeaders("STDIN|STDOUT|STDERR")
 		//
 		.log("direct:ssh: ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers:port} ended")			
 	;
