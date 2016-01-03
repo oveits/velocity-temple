@@ -384,7 +384,7 @@ public class MyRouteBuilder extends RouteBuilder {
 //			;
 		
 		from("direct:ssh")
-		// input headers: username, password, hostname, port 
+		// input headers: username, password, hostname, port (default:22) 
 		// input body: STDIN (shell commands)
 		// response headers: STDIN, STDOUT, STRERR
 		// response body: STDIN + STDOUT + STERR
