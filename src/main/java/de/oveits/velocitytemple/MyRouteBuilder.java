@@ -462,7 +462,10 @@ public class MyRouteBuilder extends RouteBuilder {
 		.setBody(simple("${body.replaceAll('<STDOUT>','headers.STDOUT').replaceAll('<STDIN>','headers.STDIN').replaceAll('<STDERR>','headers.STDERR')}"))
 
 		// we need to remove STDIN (STDOUT + STDERR if they are not null) again, so the headers do not grow too large; otherwise this could cause a 500 error.
-		.removeHeaders("STDIN|STDOUT|STDERR|format|formatOnError|hostname|port|username|password")
+		.removeHeaders("STDIN|STDOUT|STDERR")
+		// let us remove the user input (contains the user credentials; should not be sent back):
+		.removeHeaders("format|formatOnError|hostname|port|username|password")
+		// let us remove all, but keep the Location header:
 		.removeHeaders(".*", "Location")
 		//
 		.log("direct:ssh: ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers:port} ended")			
