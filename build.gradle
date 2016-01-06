@@ -37,6 +37,13 @@ dependencies {
     testCompile group: 'org.apache.camel', name: 'camel-test-spring', version:'2.16.0'
 }
 
+// make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.oveits.velocitytemple.MainApp'
+    }
+}
+
 // see http://stackoverflow.com/questions/10034084/creating-a-jar-of-test-binaries-gradle
 task testJar(type: Jar) {
 //  classifier = test
