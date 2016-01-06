@@ -37,13 +37,21 @@ dependencies {
     testCompile group: 'org.apache.camel', name: 'camel-test-spring', version:'2.16.0'
 }
 
+// copy jar files to build/libs/lib (see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle)
+task copyDeps(type: Copy) {
+    def dirName = "build/libs/lib"
+    file(dirName).mkdirs()
+    from configurations.runtime
+    into 'build/libs/lib'
+}
+
 // make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
 jar {
     manifest {
         attributes (
 	    'Main-Class': 'de.oveits.velocitytemple.MainApp',
 	    // add classpath to Manifest; see http://stackoverflow.com/questions/30087427/add-classpath-in-manifest-file-of-jar-in-gradle
-	    "Class-Path": configurations.compile.collect { it.getName() }.join(' ')
+	    "Class-Path": configurations.compile.collect { it.getName() }.join(' lib/')
 	    )
     }
 }
