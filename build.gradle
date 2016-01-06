@@ -41,7 +41,7 @@ dependencies {
 jar {
     manifest {
         attributes (
-	    'Main-Class': 'de.oveits.velocitytemple.MainApp'
+	    'Main-Class': 'de.oveits.velocitytemple.MainApp',
 	    // add classpath to Manifest; see http://stackoverflow.com/questions/30087427/add-classpath-in-manifest-file-of-jar-in-gradle
 	    "Class-Path": configurations.compile.collect { it.getName() }.join(' ')
 	    )
