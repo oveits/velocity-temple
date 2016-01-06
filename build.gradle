@@ -38,6 +38,6 @@ dependencies {
 }
 
 task testJar(type: Jar) {
- classifier = tests
+ classifier = test
  from sourceSets.test.classes
 }
