@@ -42,7 +42,7 @@ task copyJarsToLib (type: Copy) {
     def dirName = "build/libs/lib"
     file(dirName).mkdirs()
 //    from configurations.runtime
-    from configurations.compile
+    from configurations.compile configurations.testCompile
     into 'build/libs/lib'
 }
 
