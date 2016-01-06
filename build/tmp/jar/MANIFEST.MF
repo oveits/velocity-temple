@@ -1,73 +1,83 @@
 Manifest-Version: 1.0
 Main-Class: de.oveits.velocitytemple.MainApp
-Class-Path: camel-core-2.16.0.jar camel-spring-2.16.0.jar camel-jetty-
- 2.16.0.jar camel-velocity-2.16.0.jar camel-ftp-2.16.0.jar camel-http-
- 2.16.0.jar camel-stringtemplate-2.16.0.jar camel-ssh-2.16.0.jar log4j
- -1.2.17.jar guava-18.0.jar activemq-core-5.6.0.jar camel-maven-plugin
- -2.16.0.jar jaxb-core-2.2.11.jar jaxb-impl-2.2.11.jar camel-core-2.16
- .0-tests.jar spring-context-4.1.6.RELEASE.jar spring-aop-4.1.6.RELEAS
- E.jar spring-tx-4.1.6.RELEASE.jar camel-jetty9-2.16.0.jar velocity-1.
- 7.jar jsch-0.1.53.jar commons-net-3.3.jar camel-http-common-2.16.0.ja
- r geronimo-servlet_3.0_spec-1.0.jar commons-httpclient-3.1.jar common
- s-codec-1.10.jar ST4-4.0.8.jar mina-core-2.0.9.jar sshd-core-0.14.0.j
- ar bcpg-jdk15on-1.52.jar bcpkix-jdk15on-1.52.jar geronimo-jms_1.1_spe
- c-1.1.1.jar kahadb-5.6.0.jar activemq-protobuf-1.1.jar fusemq-leveldb
- -1.1.jar mqtt-client-1.0.jar org.osgi.core-4.1.0.jar geronimo-j2ee-ma
- nagement_1.1_spec-1.0.1.jar jasypt-1.8.jar camel-spring-javaconfig-2.
- 16.0.jar camel-test-blueprint-2.16.0.jar camel-cdi-2.16.0.jar exec-ma
- ven-plugin-1.2.1.jar plexus-container-default-1.0-alpha-48.jar maven-
- reporting-impl-2.0.5.jar aopalliance-1.0.jar spring-beans-4.1.6.RELEA
- SE.jar spring-core-4.1.6.RELEASE.jar jetty-server-9.2.11.v20150529.ja
- r jetty-servlet-9.2.11.v20150529.jar jetty-security-9.2.11.v20150529.
- jar jetty-servlets-9.2.11.v20150529.jar jetty-client-9.2.11.v20150529
- .jar jetty-jmx-9.2.11.v20150529.jar camel-jetty-common-2.16.0.jar com
- mons-collections-3.2.1.jar commons-lang-2.4.jar antlr-runtime-3.5.2.j
- ar bcprov-jdk15on-1.52.jar hawtbuf-proto-1.9.jar hawtdispatch-scala-1
- .9.jar leveldb-0.2.jar leveldbjni-osx-1.2.jar leveldbjni-linux32-1.2.
- jar leveldbjni-linux64-1.2.jar snappy-java-1.0.3.jar jackson-core-asl
- -1.9.2.jar jackson-mapper-asl-1.9.2.jar hadoop-core-1.0.0.jar scala-l
- ibrary-2.9.1.jar hawtdispatch-transport-1.9.jar hawtbuf-1.9.jar org.a
- pache.servicemix.bundles.cglib-3.1_1.jar camel-test-2.16.0.jar camel-
- blueprint-2.16.0.jar org.apache.aries.proxy.api-1.0.1.jar org.apache.
- aries.proxy.impl-1.0.4.jar org.apache.aries.blueprint.api-1.0.1.jar o
- rg.apache.aries.blueprint.core-1.4.4.jar org.apache.aries.blueprint.c
- m-1.0.6.jar org.apache.aries.util-1.1.0.jar org.apache.felix.connect-
- 0.1.0.jar pax-swissbox-tinybundles-1.3.2.jar junit-4.11.jar org.apach
- e.felix.configadmin-1.8.8.jar org.apache.felix.fileinstall-3.5.0.jar 
- deltaspike-core-api-1.5.0.jar deltaspike-cdictrl-api-1.5.0.jar deltas
- pike-core-impl-1.5.0.jar maven-toolchain-1.0.jar maven-model-2.0.6.ja
- r maven-artifact-2.0.6.jar maven-artifact-manager-2.0.6.jar maven-cor
- e-2.0.6.jar commons-exec-1.1.jar doxia-sink-api-1.1.jar doxia-logging
- -api-1.1.jar doxia-core-1.0.jar doxia-site-renderer-1.0.jar maven-dox
- ia-tools-1.0.2.jar commons-validator-1.2.0.jar javax.servlet-api-3.1.
- 0.jar jetty-http-9.2.11.v20150529.jar jetty-io-9.2.11.v20150529.jar j
- etty-continuation-9.2.11.v20150529.jar jetty-util-9.2.11.v20150529.ja
- r hawtdispatch-1.9.jar leveldb-api-0.2.jar guice-3.0.jar guice-multib
- indings-3.0.jar leveldbjni-1.2.jar commons-configuration-1.6.jar jett
- y-6.1.26.jar jetty-util-6.1.26.jar jsp-api-2.1-6.1.14.jar jsp-2.1-6.1
- .14.jar camel-core-xml-2.16.0.jar camel-core-osgi-2.16.0.jar org.apac
- he.aries.quiesce.api-1.0.0.jar ops4j-base-lang-1.2.2.jar ops4j-base-i
- o-1.2.2.jar ops4j-base-store-1.2.2.jar pax-swissbox-bnd-1.3.2.jar ham
- crest-core-1.3.jar maven-repository-metadata-2.0.6.jar wagon-provider
- -api-1.0-beta-2.jar maven-settings-2.0.6.jar maven-plugin-parameter-d
- ocumenter-2.0.6.jar maven-profile-2.0.6.jar maven-error-diagnostics-2
- .0.6.jar commons-cli-1.0.jar maven-plugin-descriptor-2.0.6.jar plexus
- -interactivity-api-1.0-alpha-4.jar maven-monitor-2.0.6.jar classworld
- s-1.1.jar wagon-file-1.0-beta-2.jar wagon-http-lightweight-1.0-beta-2
- .jar wagon-ssh-external-1.0-beta-2.jar wagon-ssh-1.0-beta-2.jar plexu
- s-i18n-1.0-beta-7.jar plexus-velocity-1.1.7.jar doxia-decoration-mode
- l-1.0.jar doxia-module-apt-1.0.jar doxia-module-fml-1.0.jar doxia-mod
- ule-xdoc-1.0.jar doxia-module-xhtml-1.0.jar commons-io-1.4.jar common
- s-beanutils-1.7.0.jar oro-2.0.8.jar xml-apis-2.0.2.jar javax.inject-1
- .jar cglib-2.2.1-v20090111.jar hawtjni-runtime-1.5.jar commons-beanut
- ils-core-1.8.0.jar servlet-api-2.5-20081211.jar servlet-api-2.5-6.1.1
- 4.jar ant-1.6.5.jar ops4j-base-monitors-1.2.2.jar bndlib-0.0.357.jar 
- wagon-http-shared-1.0-beta-2.jar wagon-ssh-common-1.0-beta-2.jar asm-
- 3.1.jar jtidy-4aug2000r7-dev.jar plexus-utils-1.0.2.jar spring-expres
- sion-4.1.6.RELEASE.jar slf4j-log4j12-1.7.12.jar commons-logging-1.2.j
- ar maven-project-2.0.6.jar maven-plugin-registry-2.0.6.jar maven-plug
- in-api-2.0.6.jar plexus-utils-2.0.5.jar aspectjrt-1.5.3.jar plexus-cl
- assworlds-1.2-alpha-13.jar xbean-reflect-3.4.jar commons-logging-api-
- 1.1.jar maven-reporting-api-3.0.jar commons-digester-1.8.jar slf4j-ap
- i-1.7.12.jar
+Class-Path: camel-core-2.16.0.jar lib/camel-spring-2.16.0.jar lib/came
+ l-jetty-2.16.0.jar lib/camel-velocity-2.16.0.jar lib/camel-ftp-2.16.0
+ .jar lib/camel-http-2.16.0.jar lib/camel-stringtemplate-2.16.0.jar li
+ b/camel-ssh-2.16.0.jar lib/log4j-1.2.17.jar lib/guava-18.0.jar lib/ac
+ tivemq-core-5.6.0.jar lib/camel-maven-plugin-2.16.0.jar lib/jaxb-core
+ -2.2.11.jar lib/jaxb-impl-2.2.11.jar lib/camel-core-2.16.0-tests.jar 
+ lib/spring-context-4.1.6.RELEASE.jar lib/spring-aop-4.1.6.RELEASE.jar
+  lib/spring-tx-4.1.6.RELEASE.jar lib/camel-jetty9-2.16.0.jar lib/velo
+ city-1.7.jar lib/jsch-0.1.53.jar lib/commons-net-3.3.jar lib/camel-ht
+ tp-common-2.16.0.jar lib/geronimo-servlet_3.0_spec-1.0.jar lib/common
+ s-httpclient-3.1.jar lib/commons-codec-1.10.jar lib/ST4-4.0.8.jar lib
+ /mina-core-2.0.9.jar lib/sshd-core-0.14.0.jar lib/bcpg-jdk15on-1.52.j
+ ar lib/bcpkix-jdk15on-1.52.jar lib/geronimo-jms_1.1_spec-1.1.1.jar li
+ b/kahadb-5.6.0.jar lib/activemq-protobuf-1.1.jar lib/fusemq-leveldb-1
+ .1.jar lib/mqtt-client-1.0.jar lib/org.osgi.core-4.1.0.jar lib/geroni
+ mo-j2ee-management_1.1_spec-1.0.1.jar lib/jasypt-1.8.jar lib/camel-sp
+ ring-javaconfig-2.16.0.jar lib/camel-test-blueprint-2.16.0.jar lib/ca
+ mel-cdi-2.16.0.jar lib/exec-maven-plugin-1.2.1.jar lib/plexus-contain
+ er-default-1.0-alpha-48.jar lib/maven-reporting-impl-2.0.5.jar lib/ao
+ palliance-1.0.jar lib/spring-beans-4.1.6.RELEASE.jar lib/spring-core-
+ 4.1.6.RELEASE.jar lib/jetty-server-9.2.11.v20150529.jar lib/jetty-ser
+ vlet-9.2.11.v20150529.jar lib/jetty-security-9.2.11.v20150529.jar lib
+ /jetty-servlets-9.2.11.v20150529.jar lib/jetty-client-9.2.11.v2015052
+ 9.jar lib/jetty-jmx-9.2.11.v20150529.jar lib/camel-jetty-common-2.16.
+ 0.jar lib/commons-collections-3.2.1.jar lib/commons-lang-2.4.jar lib/
+ antlr-runtime-3.5.2.jar lib/bcprov-jdk15on-1.52.jar lib/hawtbuf-proto
+ -1.9.jar lib/hawtdispatch-scala-1.9.jar lib/leveldb-0.2.jar lib/level
+ dbjni-osx-1.2.jar lib/leveldbjni-linux32-1.2.jar lib/leveldbjni-linux
+ 64-1.2.jar lib/snappy-java-1.0.3.jar lib/jackson-core-asl-1.9.2.jar l
+ ib/jackson-mapper-asl-1.9.2.jar lib/hadoop-core-1.0.0.jar lib/scala-l
+ ibrary-2.9.1.jar lib/hawtdispatch-transport-1.9.jar lib/hawtbuf-1.9.j
+ ar lib/org.apache.servicemix.bundles.cglib-3.1_1.jar lib/camel-test-2
+ .16.0.jar lib/camel-blueprint-2.16.0.jar lib/org.apache.aries.proxy.a
+ pi-1.0.1.jar lib/org.apache.aries.proxy.impl-1.0.4.jar lib/org.apache
+ .aries.blueprint.api-1.0.1.jar lib/org.apache.aries.blueprint.core-1.
+ 4.4.jar lib/org.apache.aries.blueprint.cm-1.0.6.jar lib/org.apache.ar
+ ies.util-1.1.0.jar lib/org.apache.felix.connect-0.1.0.jar lib/pax-swi
+ ssbox-tinybundles-1.3.2.jar lib/junit-4.11.jar lib/org.apache.felix.c
+ onfigadmin-1.8.8.jar lib/org.apache.felix.fileinstall-3.5.0.jar lib/d
+ eltaspike-core-api-1.5.0.jar lib/deltaspike-cdictrl-api-1.5.0.jar lib
+ /deltaspike-core-impl-1.5.0.jar lib/maven-toolchain-1.0.jar lib/maven
+ -model-2.0.6.jar lib/maven-artifact-2.0.6.jar lib/maven-artifact-mana
+ ger-2.0.6.jar lib/maven-core-2.0.6.jar lib/commons-exec-1.1.jar lib/d
+ oxia-sink-api-1.1.jar lib/doxia-logging-api-1.1.jar lib/doxia-core-1.
+ 0.jar lib/doxia-site-renderer-1.0.jar lib/maven-doxia-tools-1.0.2.jar
+  lib/commons-validator-1.2.0.jar lib/javax.servlet-api-3.1.0.jar lib/
+ jetty-http-9.2.11.v20150529.jar lib/jetty-io-9.2.11.v20150529.jar lib
+ /jetty-continuation-9.2.11.v20150529.jar lib/jetty-util-9.2.11.v20150
+ 529.jar lib/hawtdispatch-1.9.jar lib/leveldb-api-0.2.jar lib/guice-3.
+ 0.jar lib/guice-multibindings-3.0.jar lib/leveldbjni-1.2.jar lib/comm
+ ons-configuration-1.6.jar lib/jetty-6.1.26.jar lib/jetty-util-6.1.26.
+ jar lib/jsp-api-2.1-6.1.14.jar lib/jsp-2.1-6.1.14.jar lib/camel-core-
+ xml-2.16.0.jar lib/camel-core-osgi-2.16.0.jar lib/org.apache.aries.qu
+ iesce.api-1.0.0.jar lib/ops4j-base-lang-1.2.2.jar lib/ops4j-base-io-1
+ .2.2.jar lib/ops4j-base-store-1.2.2.jar lib/pax-swissbox-bnd-1.3.2.ja
+ r lib/hamcrest-core-1.3.jar lib/maven-repository-metadata-2.0.6.jar l
+ ib/wagon-provider-api-1.0-beta-2.jar lib/maven-settings-2.0.6.jar lib
+ /maven-plugin-parameter-documenter-2.0.6.jar lib/maven-profile-2.0.6.
+ jar lib/maven-error-diagnostics-2.0.6.jar lib/commons-cli-1.0.jar lib
+ /maven-plugin-descriptor-2.0.6.jar lib/plexus-interactivity-api-1.0-a
+ lpha-4.jar lib/maven-monitor-2.0.6.jar lib/classworlds-1.1.jar lib/wa
+ gon-file-1.0-beta-2.jar lib/wagon-http-lightweight-1.0-beta-2.jar lib
+ /wagon-ssh-external-1.0-beta-2.jar lib/wagon-ssh-1.0-beta-2.jar lib/p
+ lexus-i18n-1.0-beta-7.jar lib/plexus-velocity-1.1.7.jar lib/doxia-dec
+ oration-model-1.0.jar lib/doxia-module-apt-1.0.jar lib/doxia-module-f
+ ml-1.0.jar lib/doxia-module-xdoc-1.0.jar lib/doxia-module-xhtml-1.0.j
+ ar lib/commons-io-1.4.jar lib/commons-beanutils-1.7.0.jar lib/oro-2.0
+ .8.jar lib/xml-apis-2.0.2.jar lib/javax.inject-1.jar lib/cglib-2.2.1-
+ v20090111.jar lib/hawtjni-runtime-1.5.jar lib/commons-beanutils-core-
+ 1.8.0.jar lib/servlet-api-2.5-20081211.jar lib/servlet-api-2.5-6.1.14
+ .jar lib/ant-1.6.5.jar lib/ops4j-base-monitors-1.2.2.jar lib/bndlib-0
+ .0.357.jar lib/wagon-http-shared-1.0-beta-2.jar lib/wagon-ssh-common-
+ 1.0-beta-2.jar lib/asm-3.1.jar lib/jtidy-4aug2000r7-dev.jar lib/plexu
+ s-utils-1.0.2.jar lib/spring-expression-4.1.6.RELEASE.jar lib/slf4j-l
+ og4j12-1.7.12.jar lib/commons-logging-1.2.jar lib/maven-project-2.0.6
+ .jar lib/maven-plugin-registry-2.0.6.jar lib/maven-plugin-api-2.0.6.j
+ ar lib/plexus-utils-2.0.5.jar lib/aspectjrt-1.5.3.jar lib/plexus-clas
+ sworlds-1.2-alpha-13.jar lib/xbean-reflect-3.4.jar lib/commons-loggin
+ g-api-1.1.jar lib/maven-reporting-api-3.0.jar lib/commons-digester-1.
+ 8.jar lib/slf4j-api-1.7.12.jar
 
