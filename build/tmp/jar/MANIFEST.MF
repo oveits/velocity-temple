@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: de.oveits.velocitytemple.MainTest
+Main-Class: de.oveits.velocitytemple.MainApp
 Class-Path: lib/camel-core-2.16.0.jar lib/camel-spring-2.16.0.jar lib/
  camel-jetty-2.16.0.jar lib/camel-velocity-2.16.0.jar lib/camel-ftp-2.
  16.0.jar lib/camel-http-2.16.0.jar lib/camel-stringtemplate-2.16.0.ja
