@@ -43,14 +43,30 @@ dependencies {
 
 // copy jar files to build/libs/lib (see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle)
 task copyJarsToLib (type: Copy) {
-    def dirName = "build/libs/lib"
-    file(dirName).mkdirs()
+    println "executing copyJarsToLib"
+    def toDir = "build/libs/lib"
+    file(toDir).mkdirs()
+
+    configurations.compile.each { println name }
 
     // copy jars to lib folder:
     from configurations.compile
     into 'build/libs/lib'
+
     from configurations.testCompile
     into 'build/libs/lib'
+}
+
+task copyResourcesToLib (type: Copy) {
+    def toDir = "build/libs"
+    file(toDir).mkdirs()
+ 
+    from sourceSets.main.resources
+    into toDir
+
+    from sourceSets.test.resources
+    into toDir
+    
 }
 
 // make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
@@ -82,5 +98,13 @@ task testJar(type: Jar) {
    from sourceSets.main.output
 }
 
+task ttt {
+
+}
+
 // always call copyJarsToLib when building (also called when not needed, e.g. when doing a gradle test? To be tested)
 build.dependsOn copyJarsToLib
+//build.dependsOn [copyJarsToLib, copyResourcesToLib]
+//build.dependsOn copyResourcesToLib
+//build.dependsOn copyJarsToLib
+
