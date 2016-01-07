@@ -62,7 +62,7 @@ jar {
 // see http://stackoverflow.com/questions/10034084/creating-a-jar-of-test-binaries-gradle
 task testJar(type: Jar) {
     version = 'test-0.0.1-SNAPSHOT'
-    jar {
+    testJar {
         manifest {
             attributes (
                 'Main-Class': 'de.oveits.velocitytemple.MainTest',
