@@ -79,6 +79,7 @@ task testJar(type: Jar) {
     }
    version = 'test-0.0.1-SNAPSHOT'
    from sourceSets.test.output
+   from sourceSets.main.output
 }
 
 // always call copyJarsToLib when building (also called when not needed, e.g. when doing a gradle test? To be tested)
