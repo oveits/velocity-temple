@@ -1,1 +1,13 @@
 rootProject.name = 'velocity-temple'
+
+// make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
+jar {
+    manifest {
+        attributes (
+            'Main-Class': 'de.oveits.velocitytemple.MainApp',
+            // add classpath to Manifest; see http://stackoverflow.com/questions/30087427/add-classpath-in-manifest-file-of-jar-in-gradle
+            "Class-Path": 'lib/' + configurations.compile.collect { it.getName() }.join(' lib/')
+            )
+    }
+}
+
