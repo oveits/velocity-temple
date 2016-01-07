@@ -74,6 +74,8 @@ task copyResourcesToLib (type: Copy) {
 
 // make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
 jar {
+    // exclude the resources (they are found outside of the jar:
+    exclude ("properties/**")
     manifest {
         attributes (
 	    'Main-Class': 'de.oveits.velocitytemple.MainApp',
