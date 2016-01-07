@@ -43,7 +43,7 @@ dependencies {
 
 // copy jar files to build/libs/lib (see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle)
 task copyJarsToLib (type: Copy) {
-    println "executing copyJarsToLib"
+    //println "executing copyJarsToLib"
     def toDir = "build/libs/lib"
     file(toDir).mkdirs()
 
@@ -58,7 +58,7 @@ task copyJarsToLib (type: Copy) {
 }
 
 task copyResourcesToLib (type: Copy) {
-    println "executing copyResourcesToLib"
+    //println "executing copyResourcesToLib"
     def toDir = "build/libs"
     file(toDir).mkdirs()
  
@@ -72,29 +72,37 @@ task copyResourcesToLib (type: Copy) {
     
 }
 
-// make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
 jar {
-    // exclude the resources (they are found outside of the jar:
+    // exclude the resources (they are found outside of the jar):
     exclude ("properties/**")
+    exclude ("templates/**")
+    exclude ("log4j.properties")
+    
+
+    // make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
     manifest {
         attributes (
 	    'Main-Class': 'de.oveits.velocitytemple.MainApp',
 	    // add classpath to Manifest; see http://stackoverflow.com/questions/30087427/add-classpath-in-manifest-file-of-jar-in-gradle
-	    "Class-Path": 'lib/' + configurations.compile.collect { it.getName() }.join(' lib/')
+	    "Class-Path": '. lib/' + configurations.compile.collect { it.getName() }.join(' lib/')
 	    )
     }
 }
 
 // create test jar: see http://stackoverflow.com/questions/10034084/creating-a-jar-of-test-binaries-gradle + trial and error or better trial and success:
 task testJar(type: Jar) {
-//  redefine jar variables:
-//  make test jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
     testJar {
+	// exclude the resources (they are found outside of the jar):
+        exclude ("properties/**")
+	exclude ("templates/**")
+	exclude ("log4j.properties")
+
+        // make jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
         manifest {
             attributes (
                 'Main-Class': 'de.oveits.velocitytemple.MainTest',
                 // add classpath to Manifest; see http://stackoverflow.com/questions/30087427/add-classpath-in-manifest-file-of-jar-in-gradle
-                "Class-Path": 'lib/' + configurations.compile.collect { it.getName() }.join(' lib/')
+                "Class-Path": '. lib/' + configurations.compile.collect { it.getName() }.join(' lib/')
                 )
         }
     }
