@@ -47,23 +47,26 @@ task copyJarsToLib (type: Copy) {
     def toDir = "build/libs/lib"
     file(toDir).mkdirs()
 
-    configurations.compile.each { println name }
+    // debugging:
+    //configurations.compile.each { println it }
+    //configurations.testCompile.each { println it }
 
     // copy jars to lib folder:
     from configurations.compile
-    into 'build/libs/lib'
-
     from configurations.testCompile
-    into 'build/libs/lib'
+    into toDir
 }
 
 task copyResourcesToLib (type: Copy) {
+    println "executing copyResourcesToLib"
     def toDir = "build/libs"
     file(toDir).mkdirs()
  
-    from sourceSets.main.resources
-    into toDir
+    // debugging:
+    //sourceSets.main.resources.each { println it }
+    //sourceSets.test.resources.each { println it }
 
+    from sourceSets.main.resources
     from sourceSets.test.resources
     into toDir
     
@@ -98,13 +101,11 @@ task testJar(type: Jar) {
    from sourceSets.main.output
 }
 
-task ttt {
+// always call copyResourcesToLib when building jars:
+jar.dependsOn copyResourcesToLib
+testJar.dependsOn copyResourcesToLib
 
-}
-
-// always call copyJarsToLib when building (also called when not needed, e.g. when doing a gradle test? To be tested)
-build.dependsOn copyJarsToLib
-//build.dependsOn [copyJarsToLib, copyResourcesToLib]
-//build.dependsOn copyResourcesToLib
-//build.dependsOn copyJarsToLib
+// always call copyJarsToLib when building jars:
+jar.dependsOn copyJarsToLib
+testJar.dependsOn copyJarsToLib
 
