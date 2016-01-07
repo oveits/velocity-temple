@@ -59,6 +59,17 @@ jar {
     }
 }
 
+// make test jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
+testJar {
+    manifest {
+        attributes (
+	    'Main-Class': 'de.oveits.velocitytemple.MainTest',
+	    // add classpath to Manifest; see http://stackoverflow.com/questions/30087427/add-classpath-in-manifest-file-of-jar-in-gradle
+	    "Class-Path": 'lib/' + configurations.compile.collect { it.getName() }.join(' lib/')
+	    )
+    }
+}
+
 // see http://stackoverflow.com/questions/10034084/creating-a-jar-of-test-binaries-gradle
 task testJar(type: Jar) {
 //  classifier = test
