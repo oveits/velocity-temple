@@ -1,1 +1,2 @@
+#!/usr/bin/env bash
 git clean -df; git checkout -- .
