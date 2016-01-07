@@ -41,7 +41,8 @@ dependencies {
 task copyJarsToLib (type: Copy) {
     def dirName = "build/libs/lib"
     file(dirName).mkdirs()
-//    from configurations.runtime
+
+    // copy jars to lib folder:
     from configurations.compile
     into 'build/libs/lib'
     from configurations.testCompile
@@ -59,7 +60,7 @@ jar {
     }
 }
 
-// see http://stackoverflow.com/questions/10034084/creating-a-jar-of-test-binaries-gradle
+// create test jar: see http://stackoverflow.com/questions/10034084/creating-a-jar-of-test-binaries-gradle + trial and error or better trial and success:
 task testJar(type: Jar) {
 //  redefine jar variables:
 //  make test jar executable: see http://stackoverflow.com/questions/21721119/creating-runnable-jar-with-gradle
