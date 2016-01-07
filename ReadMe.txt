@@ -74,3 +74,23 @@ Start the jar with the possibility to attach JConsole:
    in jvisualvm.exe, menu -> File -> Add JMX connection and add the URI
    ervice:jmx:rmi:///jndi/rmi://DE04058W:1099/jmxrmi/camel (or the corresponding URI shown during startup in 1)
      
+
+How to build the project using gradle
+=====================================
+
+To create a runnable jar, perform the following command in the project root:
+
+   gradle jar
+
+To run the jar, perform (you might need to replace the version number):
+
+   java -jar build/libs/velocity-temple-0.0.1-SNAPSHOT.jar
+
+To create a runnable jar for the JUnit tests, perform the following command in the project root:
+
+   gradle testJar
+
+To run the test jar:
+
+   1) start the main application, if not already done
+   2) java -jar build/libs/velocity-temple-test-0.0.1-SNAPSHOT.jar
