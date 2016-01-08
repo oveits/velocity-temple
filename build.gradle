@@ -36,8 +36,8 @@ dependencies {
     compile group: 'org.apache.camel', name: 'camel-maven-plugin', version:'2.16.0'
     testCompile group: 'org.apache.camel', name: 'camel-test-spring', version:'2.16.0'
 
-    // trying to add the classes from src/main to the test jar:
-    // inspired from https://discuss.gradle.org/t/building-multiple-jars-per-project/5454/3
+    // adding the classes from src/main to the test jar:
+    // inspired by https://discuss.gradle.org/t/building-multiple-jars-per-project/5454/3
     testCompile sourceSets.main.output
 }
 
