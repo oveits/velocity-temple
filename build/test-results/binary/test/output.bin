@@ -1,6 +1,6 @@
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-í[                   Test worker] VelocityTempleTests            INFO  Testing: test_deleteTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
+Ü[                   Test worker] SshTests                       INFO  Testing: test_ssh_no_stderr(de.oveits.velocitytemple.SshTests)
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
 [                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-1) is starting
 V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
 b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
@@ -9,22 +9,21 @@
 ‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
 í[                   Test worker] DefaultCamelContext            INFO  Route: route1 started and consuming from: Endpoint[direct://recipientList]
 n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
-å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-1) started in 0.892 seconds
+å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-1) started in 1.140 seconds
 w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-ó[                   Test worker] VelocityTempleTests            INFO  Testing done: test_deleteTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-h[                   Test worker] VelocityTempleTests            INFO  Took: 0.231 seconds (231 millis)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
+ã[                   Test worker] SshTests                       INFO  Testing done: test_ssh_no_stderr(de.oveits.velocitytemple.SshTests)
+i[                   Test worker] SshTests                       INFO  Took: 1.541 seconds (1541 millis)
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
 Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-1) is shutting down
 É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
 ù[el-1) thread #0 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route1 shutdown complete, was consuming from: Endpoint[direct://recipientList]
 |[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
-à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-1) uptime 1.142 seconds
+à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-1) uptime 2.701 seconds
 ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-1) is shutdown in 0.012 seconds
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-ê[                   Test worker] VelocityTempleTests            INFO  Testing: test_readTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
+à[                   Test worker] SshTests                       INFO  Testing: test_ssh_with_stderr(de.oveits.velocitytemple.SshTests)
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
 [                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) is starting
 V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
 b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
@@ -33,206 +32,253 @@
 ‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
 í[                   Test worker] DefaultCamelContext            INFO  Route: route2 started and consuming from: Endpoint[direct://recipientList]
 n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
-å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) started in 0.423 seconds
-≈[                   Test worker] route2                         INFO  failed request: <pre>ERROR: org.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404
-STACK: 
-HEADERS: {breadcrumbId=ID-DE04058W-49463-1452049030525-1-3, CamelHttpMethod=DELETE, name=London, recipientList=http://localhost:2005/templates/ttt, ResultCode=1, ResultText=Failure}
-BODY: null</pre>
-Ê[                   Test worker] DefaultErrorHandler            ERROR Failed delivery for (MessageId: ID-DE04058W-49463-1452049030525-1-5 on ExchangeId: ID-DE04058W-49463-1452049030525-1-6). Exhausted after delivery attempt: 1 caught: org.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404. Processed by failure processor: FatalFallbackErrorHandler[Pipeline[[Channel[SetHeader(ResultCode, 1)], Channel[SetHeader(ResultText, Failure)], Channel[convertBodyTo[java.lang.String]], Channel[BeanProcessor[de.oveits.velocitytemple.MyExceptionHandler(0x2f7a6e0e)]], Channel[Log(route2)[failed request: ${body}]], Channel[SetHeader(Content-Type, text/html)]]]]
-
-Message History
----------------------------------------------------------------------------------------------------------------------------------------
-RouteId              ProcessorId          Processor                                                                        Elapsed (ms)
-[route2            ] [route2            ] [direct://recipientList                                                        ] [        14]
-[route2            ] [recipientList2    ] [recipientList[simple{Simple: ${headers.recipientList}}]                       ] [        15]
-[                  ] [setHeader4        ] [setHeader[ResultCode]                                                         ] [         0]
-[                  ] [setHeader5        ] [setHeader[ResultText]                                                         ] [         0]
-[                  ] [convertBodyTo2    ] [convertBodyTo[java.lang.String]                                               ] [         0]
-[                  ] [bean2             ] [bean[de.oveits.velocitytemple.MyExceptionHandler@2f7a6e0e]                    ] [         1]
-[                  ] [log2              ] [log                                                                           ] [         1]
-[                  ] [setHeader6        ] [setHeader[Content-Type]                                                       ] [         0]
-
-Exchange
----------------------------------------------------------------------------------------------------------------------------------------
-Exchange[
-:	Id                  ID-DE04058W-49463-1452049030525-1-6
-	ExchangePattern     InOnly
-/	Headers             {Content-Type=text/html}
-	BodyType            String
-Ñ	Body                <pre>ERROR: org.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404
-STACK: 
-HEADERS: {breadcrumbId=ID-DE04058W-49463-1452049030525-1-3, CamelHttpMethod=DELETE, name=London, recipientList=http://localhost:2005/templates/ttt, ResultCode=1, ResultText=Failure}
-BODY: null</pre>
-ó]
-
-Stacktrace
----------------------------------------------------------------------------------------------------------------------------------------
-îorg.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404
-n	at org.apache.camel.component.http.HttpProducer.populateHttpOperationFailedException(HttpProducer.java:239)
-Q	at org.apache.camel.component.http.HttpProducer.process(HttpProducer.java:161)
-à	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
-`	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:460)
-`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
-d	at org.apache.camel.processor.MulticastProcessor.doProcessSequential(MulticastProcessor.java:668)
-d	at org.apache.camel.processor.MulticastProcessor.doProcessSequential(MulticastProcessor.java:596)
-X	at org.apache.camel.processor.MulticastProcessor.process(MulticastProcessor.java:237)
-Z	at org.apache.camel.processor.RecipientList.sendToRecipientList(RecipientList.java:178)
-N	at org.apache.camel.processor.RecipientList.process(RecipientList.java:131)
-D	at org.apache.camel.processor.Pipeline.process(Pipeline.java:121)
-C	at org.apache.camel.processor.Pipeline.process(Pipeline.java:83)
-d	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:77)
-`	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:460)
-`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
-D	at org.apache.camel.processor.Pipeline.process(Pipeline.java:121)
-C	at org.apache.camel.processor.Pipeline.process(Pipeline.java:83)
-`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
-V	at org.apache.camel.component.direct.DirectProducer.process(DirectProducer.java:62)
-`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
-W	at org.apache.camel.util.AsyncProcessorHelper.process(AsyncProcessorHelper.java:109)
-W	at org.apache.camel.processor.UnitOfWorkProducer.process(UnitOfWorkProducer.java:68)
-P	at org.apache.camel.impl.ProducerCache$2.doInProducer(ProducerCache.java:412)
-P	at org.apache.camel.impl.ProducerCache$2.doInProducer(ProducerCache.java:380)
-N	at org.apache.camel.impl.ProducerCache.doInProducer(ProducerCache.java:270)
-N	at org.apache.camel.impl.ProducerCache.sendExchange(ProducerCache.java:380)
-F	at org.apache.camel.impl.ProducerCache.send(ProducerCache.java:221)
-Z	at org.apache.camel.impl.DefaultProducerTemplate.send(DefaultProducerTemplate.java:124)
-h	at org.apache.camel.impl.DefaultProducerTemplate.sendBodyAndHeaders(DefaultProducerTemplate.java:233)
-h	at org.apache.camel.impl.DefaultProducerTemplate.sendBodyAndHeaders(DefaultProducerTemplate.java:229)
-U	at de.oveits.velocitytemple.VelocityTempleTests.setUp(VelocityTempleTests.java:61)
-A	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-S	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-[	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-6	at java.lang.reflect.Method.invoke(Method.java:601)
-Z	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
-Y	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-X	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
-S	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
-Q	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-A	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
-A	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
-9	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
-C	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
-W	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
-W	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
-A	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-E	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-G	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-E	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-F	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-Q	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-?	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-v	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:105)
-p	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:56)
-{	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:64)
-u	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:50)
-A	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-S	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-[	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-6	at java.lang.reflect.Method.invoke(Method.java:601)
-[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
-[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-k	at org.gradle.messaging.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
-z	at org.gradle.messaging.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
-.	at $Proxy2.processTestClass(Unknown Source)
-c	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:106)
-A	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-S	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-[	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-6	at java.lang.reflect.Method.invoke(Method.java:601)
-[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
-[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-Z	at org.gradle.messaging.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:360)
-l	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:54)
-_	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:40)
-U	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
-U	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
-+	at java.lang.Thread.run(Thread.java:722)
+å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) started in 0.433 seconds
 w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-ï[                   Test worker] VelocityTempleTests            INFO  Testing done: test_readTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-g[                   Test worker] VelocityTempleTests            INFO  Took: 0.062 seconds (62 millis)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
+ç[                   Test worker] SshTests                       INFO  Testing done: test_ssh_with_stderr(de.oveits.velocitytemple.SshTests)
+i[                   Test worker] SshTests                       INFO  Took: 1.415 seconds (1415 millis)
+ò[                   Test worker] SshTests                       INFO  ********************************************************************************
 Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) is shutting down
 É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
 ù[el-2) thread #1 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route2 shutdown complete, was consuming from: Endpoint[direct://recipientList]
 |[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
-à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) uptime 0.492 seconds
-ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) is shutdown in 0.005 seconds
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-í[                   Test worker] VelocityTempleTests            INFO  Testing: test_updateTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) is starting
-V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
-b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
-À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
-Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
-‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
-í[                   Test worker] DefaultCamelContext            INFO  Route: route3 started and consuming from: Endpoint[direct://recipientList]
-n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
-å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) started in 0.370 seconds
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-ó[                   Test worker] VelocityTempleTests            INFO  Testing done: test_updateTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-g[                   Test worker] VelocityTempleTests            INFO  Took: 0.027 seconds (27 millis)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) is shutting down
-É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
-ù[el-3) thread #2 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route3 shutdown complete, was consuming from: Endpoint[direct://recipientList]
-|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
-à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) uptime 0.402 seconds
-ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) is shutdown in 0.003 seconds
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-í[                   Test worker] VelocityTempleTests            INFO  Testing: test_createTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) is starting
-V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
-b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
-À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
-Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
-‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
-í[                   Test worker] DefaultCamelContext            INFO  Route: route4 started and consuming from: Endpoint[direct://recipientList]
-n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
-å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) started in 0.609 seconds
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-ó[                   Test worker] VelocityTempleTests            INFO  Testing done: test_createTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-h[                   Test worker] VelocityTempleTests            INFO  Took: 0.590 seconds (590 millis)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) is shutting down
-É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
-ù[el-4) thread #3 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route4 shutdown complete, was consuming from: Endpoint[direct://recipientList]
-|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
-à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) uptime 1.204 seconds
-ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) is shutdown in 0.004 seconds
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-ë[                   Test worker] VelocityTempleTests            INFO  Testing: test_applyTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) is starting
-V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
-b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
-À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
-Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
-‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
-í[                   Test worker] DefaultCamelContext            INFO  Route: route5 started and consuming from: Endpoint[direct://recipientList]
-n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
-å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) started in 0.305 seconds
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-ñ[                   Test worker] VelocityTempleTests            INFO  Testing done: test_applyTemplate(de.oveits.velocitytemple.VelocityTempleTests)
-g[                   Test worker] VelocityTempleTests            INFO  Took: 0.092 seconds (92 millis)
-ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
-Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) is shutting down
-É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
-ù[el-5) thread #4 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route5 shutdown complete, was consuming from: Endpoint[direct://recipientList]
-|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
-à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) uptime 0.402 seconds
-ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) is shutdown in 0.004 seconds
+à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) uptime 1.855 seconds
+ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-2) is shutdown in 0.006 seconds
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+í[                   Test worker] VelocityTempleTests            INFO  Testing: test_deleteTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) is starting
+V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
+b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
+À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+í[                   Test worker] DefaultCamelContext            INFO  Route: route3 started and consuming from: Endpoint[direct://recipientList]
+n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
+å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) started in 0.394 seconds
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ó[                   Test worker] VelocityTempleTests            INFO  Testing done: test_deleteTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+g[                   Test worker] VelocityTempleTests            INFO  Took: 0.053 seconds (53 millis)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) is shutting down
+É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
+ù[el-3) thread #2 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route3 shutdown complete, was consuming from: Endpoint[direct://recipientList]
+|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
+à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) uptime 0.459 seconds
+ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-3) is shutdown in 0.010 seconds
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ê[                   Test worker] VelocityTempleTests            INFO  Testing: test_readTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) is starting
+V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
+b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
+À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+í[                   Test worker] DefaultCamelContext            INFO  Route: route4 started and consuming from: Endpoint[direct://recipientList]
+n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
+å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) started in 0.295 seconds
+≈[                   Test worker] route4                         INFO  failed request: <pre>ERROR: org.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404
+STACK: 
+HEADERS: {breadcrumbId=ID-DE04058W-65488-1452261544291-3-3, CamelHttpMethod=DELETE, name=London, recipientList=http://localhost:2005/templates/ttt, ResultCode=1, ResultText=Failure}
+BODY: null</pre>
+Ê[                   Test worker] DefaultErrorHandler            ERROR Failed delivery for (MessageId: ID-DE04058W-65488-1452261544291-3-5 on ExchangeId: ID-DE04058W-65488-1452261544291-3-6). Exhausted after delivery attempt: 1 caught: org.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404. Processed by failure processor: FatalFallbackErrorHandler[Pipeline[[Channel[SetHeader(ResultCode, 1)], Channel[SetHeader(ResultText, Failure)], Channel[convertBodyTo[java.lang.String]], Channel[BeanProcessor[de.oveits.velocitytemple.MyExceptionHandler(0x36905f7a)]], Channel[Log(route4)[failed request: ${body}]], Channel[SetHeader(Content-Type, text/html)]]]]
+
+Message History
+---------------------------------------------------------------------------------------------------------------------------------------
+RouteId              ProcessorId          Processor                                                                        Elapsed (ms)
+[route4            ] [route4            ] [direct://recipientList                                                        ] [        23]
+[route4            ] [recipientList4    ] [recipientList[simple{Simple: ${headers.recipientList}}]                       ] [        23]
+[                  ] [setHeader10       ] [setHeader[ResultCode]                                                         ] [         0]
+[                  ] [setHeader11       ] [setHeader[ResultText]                                                         ] [         0]
+[                  ] [convertBodyTo4    ] [convertBodyTo[java.lang.String]                                               ] [         0]
+[                  ] [bean4             ] [bean[de.oveits.velocitytemple.MyExceptionHandler@36905f7a]                    ] [         4]
+[                  ] [log4              ] [log                                                                           ] [         0]
+[                  ] [setHeader12       ] [setHeader[Content-Type]                                                       ] [         0]
+
+Exchange
+---------------------------------------------------------------------------------------------------------------------------------------
+Exchange[
+:	Id                  ID-DE04058W-65488-1452261544291-3-6
+	ExchangePattern     InOnly
+/	Headers             {Content-Type=text/html}
+	BodyType            String
+Ñ	Body                <pre>ERROR: org.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404
+STACK: 
+HEADERS: {breadcrumbId=ID-DE04058W-65488-1452261544291-3-3, CamelHttpMethod=DELETE, name=London, recipientList=http://localhost:2005/templates/ttt, ResultCode=1, ResultText=Failure}
+BODY: null</pre>
+ó]
+
+Stacktrace
+---------------------------------------------------------------------------------------------------------------------------------------
+îorg.apache.camel.http.common.HttpOperationFailedException: HTTP operation failed invoking http://localhost:2005/templates/ttt with statusCode: 404
+n	at org.apache.camel.component.http.HttpProducer.populateHttpOperationFailedException(HttpProducer.java:239)
+Q	at org.apache.camel.component.http.HttpProducer.process(HttpProducer.java:161)
+à	at org.apache.camel.util.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:61)
+`	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:460)
+`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
+d	at org.apache.camel.processor.MulticastProcessor.doProcessSequential(MulticastProcessor.java:668)
+d	at org.apache.camel.processor.MulticastProcessor.doProcessSequential(MulticastProcessor.java:596)
+X	at org.apache.camel.processor.MulticastProcessor.process(MulticastProcessor.java:237)
+Z	at org.apache.camel.processor.RecipientList.sendToRecipientList(RecipientList.java:178)
+N	at org.apache.camel.processor.RecipientList.process(RecipientList.java:131)
+D	at org.apache.camel.processor.Pipeline.process(Pipeline.java:121)
+C	at org.apache.camel.processor.Pipeline.process(Pipeline.java:83)
+d	at org.apache.camel.management.InstrumentationProcessor.process(InstrumentationProcessor.java:77)
+`	at org.apache.camel.processor.RedeliveryErrorHandler.process(RedeliveryErrorHandler.java:460)
+`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
+D	at org.apache.camel.processor.Pipeline.process(Pipeline.java:121)
+C	at org.apache.camel.processor.Pipeline.process(Pipeline.java:83)
+`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
+V	at org.apache.camel.component.direct.DirectProducer.process(DirectProducer.java:62)
+`	at org.apache.camel.processor.CamelInternalProcessor.process(CamelInternalProcessor.java:190)
+W	at org.apache.camel.util.AsyncProcessorHelper.process(AsyncProcessorHelper.java:109)
+W	at org.apache.camel.processor.UnitOfWorkProducer.process(UnitOfWorkProducer.java:68)
+P	at org.apache.camel.impl.ProducerCache$2.doInProducer(ProducerCache.java:412)
+P	at org.apache.camel.impl.ProducerCache$2.doInProducer(ProducerCache.java:380)
+N	at org.apache.camel.impl.ProducerCache.doInProducer(ProducerCache.java:270)
+N	at org.apache.camel.impl.ProducerCache.sendExchange(ProducerCache.java:380)
+F	at org.apache.camel.impl.ProducerCache.send(ProducerCache.java:221)
+Z	at org.apache.camel.impl.DefaultProducerTemplate.send(DefaultProducerTemplate.java:124)
+h	at org.apache.camel.impl.DefaultProducerTemplate.sendBodyAndHeaders(DefaultProducerTemplate.java:233)
+h	at org.apache.camel.impl.DefaultProducerTemplate.sendBodyAndHeaders(DefaultProducerTemplate.java:229)
+U	at de.oveits.velocitytemple.VelocityTempleTests.setUp(VelocityTempleTests.java:61)
+A	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+S	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+[	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+6	at java.lang.reflect.Method.invoke(Method.java:601)
+Z	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+Y	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+X	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+S	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+Q	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+A	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+A	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)
+9	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+C	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+W	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+W	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+A	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+E	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+G	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+E	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+F	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+Q	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+?	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+v	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:105)
+p	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:56)
+{	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:64)
+u	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:50)
+A	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+S	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+[	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+6	at java.lang.reflect.Method.invoke(Method.java:601)
+[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+k	at org.gradle.messaging.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+z	at org.gradle.messaging.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+.	at $Proxy2.processTestClass(Unknown Source)
+c	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:106)
+A	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+S	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+[	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+6	at java.lang.reflect.Method.invoke(Method.java:601)
+[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+[	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+Z	at org.gradle.messaging.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:360)
+l	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:54)
+_	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:40)
+U	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+U	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
++	at java.lang.Thread.run(Thread.java:722)
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ï[                   Test worker] VelocityTempleTests            INFO  Testing done: test_readTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+g[                   Test worker] VelocityTempleTests            INFO  Took: 0.078 seconds (78 millis)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) is shutting down
+É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
+ù[el-4) thread #3 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route4 shutdown complete, was consuming from: Endpoint[direct://recipientList]
+|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
+à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) uptime 0.379 seconds
+ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-4) is shutdown in 0.004 seconds
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+í[                   Test worker] VelocityTempleTests            INFO  Testing: test_updateTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) is starting
+V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
+b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
+À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+í[                   Test worker] DefaultCamelContext            INFO  Route: route5 started and consuming from: Endpoint[direct://recipientList]
+n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
+å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) started in 0.288 seconds
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ó[                   Test worker] VelocityTempleTests            INFO  Testing done: test_updateTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+g[                   Test worker] VelocityTempleTests            INFO  Took: 0.047 seconds (47 millis)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) is shutting down
+É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
+ù[el-5) thread #4 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route5 shutdown complete, was consuming from: Endpoint[direct://recipientList]
+|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
+à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) uptime 0.341 seconds
+ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-5) is shutdown in 0.004 seconds
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+í[                   Test worker] VelocityTempleTests            INFO  Testing: test_createTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-6) is starting
+V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
+b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
+À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+í[                   Test worker] DefaultCamelContext            INFO  Route: route6 started and consuming from: Endpoint[direct://recipientList]
+n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
+å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-6) started in 0.397 seconds
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+ó[                   Test worker] VelocityTempleTests            INFO  Testing done: test_createTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+g[                   Test worker] VelocityTempleTests            INFO  Took: 0.044 seconds (44 millis)
+ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-6) is shutting down
+É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
+ù[el-6) thread #5 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route6 shutdown complete, was consuming from: Endpoint[direct://recipientList]
+|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
+à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-6) uptime 0.449 seconds
+ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-6) is shutdown in 0.006 seconds
+	ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+	ë[                   Test worker] VelocityTempleTests            INFO  Testing: test_applyTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+	ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+	[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-7) is starting
+	V[                   Test worker] ManagedManagementStrategy      INFO  JMX is enabled
+	b[                   Test worker] DefaultTypeConverter           INFO  Loaded 196 type converters
+	À[                   Test worker] DefaultRuntimeEndpointRegistry INFO  Runtime endpoint registry is in extended mode gathering usage statistics of all incoming and outgoing endpoints (cache limit: 1000)
+	Ë[                   Test worker] DefaultCamelContext            INFO  AllowUseOriginalMessage is enabled. If access to the original message is not needed, then its recommended to turn this option off as it may improve performance.
+	‰[                   Test worker] DefaultCamelContext            INFO  StreamCaching is not in use. If using streams then its recommended to enable stream caching. See more details at http://camel.apache.org/stream-caching.html
+	í[                   Test worker] DefaultCamelContext            INFO  Route: route7 started and consuming from: Endpoint[direct://recipientList]
+	n[                   Test worker] DefaultCamelContext            INFO  Total 1 routes, of which 1 is started.
+	å[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-7) started in 0.366 seconds
+	w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+	w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+	w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+	w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+	w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+	w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+	w[                   Test worker] MockEndpoint                   INFO  Asserting: Endpoint[mock://result] is satisfied
+	ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+	ñ[                   Test worker] VelocityTempleTests            INFO  Testing done: test_applyTemplate(de.oveits.velocitytemple.VelocityTempleTests)
+	g[                   Test worker] VelocityTempleTests            INFO  Took: 0.095 seconds (95 millis)
+	ò[                   Test worker] VelocityTempleTests            INFO  ********************************************************************************
+	Ñ[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-7) is shutting down
+	É[                   Test worker] DefaultShutdownStrategy        INFO  Starting to graceful shutdown 1 routes (timeout 10 seconds)
+	ù[el-7) thread #6 - ShutdownTask] DefaultShutdownStrategy        INFO  Route: route7 shutdown complete, was consuming from: Endpoint[direct://recipientList]
+	|[                   Test worker] DefaultShutdownStrategy        INFO  Graceful shutdown of 1 routes completed in 0 seconds
+	à[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-7) uptime 0.467 seconds
+	ê[                   Test worker] DefaultCamelContext            INFO  Apache Camel 2.16.0 (CamelContext: camel-7) is shutdown in 0.005 seconds

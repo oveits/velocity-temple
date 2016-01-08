@@ -8,3 +8,4 @@ src/main/resources/templates/ttt
 src/main/resources/templates/testfolder/
 .gradle
 *.swp
+build/*
