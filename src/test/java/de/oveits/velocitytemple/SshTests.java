@@ -16,17 +16,8 @@ package de.oveits.velocitytemple;
  * limitations under the License.
  */
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
-
-import org.apache.camel.Exchange;
-import org.apache.camel.Message;
-import org.apache.camel.Predicate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
@@ -39,7 +30,7 @@ import org.junit.Test;
 public class SshTests extends CamelTestSupport {
 
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         super.setUp();
         
         // the ssh tests are stateless, so there is nothing to do (yet) as setup
@@ -54,7 +45,7 @@ public class SshTests extends CamelTestSupport {
 //        //
 //        MockEndpoint mock = getMockEndpoint("mock:result");
 //
-//        Map<String,Object> headers = new HashMap<String,Object>();
+//        Map<String, Object> headers = new HashMap<String, Object>();
 //        String body;
 //        //
 //        headers.put("recipientList", "http://localhost:2005/templates/ttt");
@@ -69,24 +60,24 @@ public class SshTests extends CamelTestSupport {
     
     
     @Override
-    public boolean useJmx() {
+    public final boolean useJmx() {
         return true;
     }
     
     @Test
-    public void test_ssh_no_stderr() throws Exception {
+    public final void sshNoStderr() throws Exception {
     	//
     	// INIT: 
     	//
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
+        Map<String, Object> headers = new HashMap<String, Object>();
         String body;
 
         //
     	// ssh with commands that will not return a STDERR
     	//
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -94,7 +85,8 @@ public class SshTests extends CamelTestSupport {
         mock.expectedHeaderReceived("CamelHttpResponseCode", "200");
         mock.expectedHeaderReceived("Location", "http://localhost:2005/ssh");
 
-        headers.put("recipientList", "http://localhost:2005/ssh?throwExceptionOnFailure=false");
+        headers.put("recipientList", 
+        		"http://localhost:2005/ssh?throwExceptionOnFailure=false");
         headers.put("CamelHttpMethod", "POST");
         headers.put("username", "srx");
         headers.put("password", "2GwN!gb4");
@@ -103,10 +95,12 @@ public class SshTests extends CamelTestSupport {
         // Optional Headers:
 		// port default is 22:
 		headers.put("port", "22");
-		// default is defined in velocity-template-temple.properties: default.format (or later to be changed to format.default?)
+		// default is defined in velocity-template-temple.properties: default.format 
+		// (or later to be changed to format.default?)
 		// Note: backslash needs to be escaped here, but not in the real header
 		headers.put("format", "### OUTPUT ###\\n<STDOUT>");
-		// default is defined in velocity-template-temple.properties: default.formatOnError (or later to be changed to formatOnError.default?)
+		// default is defined in velocity-template-temple.properties: default.formatOnError 
+		// (or later to be changed to formatOnError.default?)
 		headers.put("formatOnError", "### OUTPUT ###\\n<STDOUT>### ERROR ###\\n<STDERR>");
 		
         body = "echo Hello World";
@@ -119,19 +113,19 @@ public class SshTests extends CamelTestSupport {
     }
     
     @Test
-    public void test_ssh_with_stderr() throws Exception {
+    public final void sshWithStderr() throws Exception {
     	//
     	// INIT: 
     	//
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
+        Map<String, Object> headers = new HashMap<String, Object>();
         String body;
 
         //
     	// ssh with commands that will not return a STDERR
     	//
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -167,7 +161,7 @@ public class SshTests extends CamelTestSupport {
 
     protected RouteBuilder createRouteBuilder() throws Exception {
         return new RouteBuilder() {
-            public void configure() throws Exception {
+            public final void configure() throws Exception {
             	
         		onException(Exception.class)
 				.setHeader("ResultCode", constant(1))

@@ -3,16 +3,12 @@ package de.oveits.velocitytemple;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
 import org.apache.camel.Body;
 import org.apache.camel.Exchange;
 import org.apache.camel.Headers;
 import org.apache.camel.CamelContext;
-import org.apache.camel.model.ModelCamelContext;
-
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
@@ -22,7 +18,7 @@ public class ClearContentCache {
 	// will clear the contentCache of velocity Templates and alike using JMX
 	//
 
-	public String clearContentCache( Exchange exchange, CamelContext context, @Body String body, @Headers Map<String,Object> headers) throws Exception {
+	public final String clearContentCache(final Exchange exchange, final CamelContext context, @Body final String body, @Headers final Map<String, Object> headers) throws Exception {
 
 //		Iterator<String> headerIterator = headers.keySet().iterator();
 //		while (headerIterator.hasNext()) {

@@ -18,11 +18,7 @@ package de.oveits.velocitytemple;
 
 import java.io.File;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.impl.SimpleRegistry;
 //import org.apache.camel.main.Main;
-import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.Main;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
@@ -38,7 +34,7 @@ public class MainApp {
     /**
      * A main() so we can easily run these routing rules in our IDE
      */
-    public static void main(String... args) throws Exception {
+    public static void main(final String... args) throws Exception {
     	
 //    	// OV added: write myHTTPHeaderFilterStrategy into registry for later use for HTTP producers
 //    	SimpleRegistry registry = new SimpleRegistry();
@@ -64,7 +60,7 @@ public class MainApp {
 //    }
 
 
-    private static void startCamel(String[] args) throws Exception {
+    private static void startCamel(final String[] args) throws Exception {
         Main main = new Main();
         main.enableHangupSupport();
         //main.addRouteBuilder(new MyRouteBuilder());

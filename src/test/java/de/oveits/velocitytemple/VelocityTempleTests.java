@@ -16,17 +16,9 @@ package de.oveits.velocitytemple;
  * limitations under the License.
  */
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
-
 import org.apache.camel.Exchange;
-import org.apache.camel.Message;
-import org.apache.camel.Predicate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
@@ -34,12 +26,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Unit test the cahce when reloading .tm files in the classpath
+ * Unit test the cache when reloading .tm files in the classpath
  */
 public class VelocityTempleTests extends CamelTestSupport {
 
     @Before
-    public void setUp() throws Exception {
+    public final void setUp() throws Exception {
         super.setUp();
 
         // create a tm file in the classpath as this is the tricky reloading stuff
@@ -50,23 +42,23 @@ public class VelocityTempleTests extends CamelTestSupport {
         //
         MockEndpoint mock = getMockEndpoint("mock:result");
 
-        Map<String,Object> headers = new HashMap<String,Object>();
+        Map<String, Object> headers = new HashMap<String, Object>();
         String body;
         //
         headers.put("recipientList", "http://localhost:2005/templates/ttt");
         headers.put("CamelHttpMethod", "DELETE");
         headers.put("name", "London");
-        body=null;
+        body = null;
         //
         template.sendBodyAndHeaders("direct:recipientList", body, headers); 
         
         mock.reset();
     }
     
-    public void setupCreatedTemplate() throws Exception {
+    public final void setupCreatedTemplate() throws Exception {
     	
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
+        Map<String, Object> headers = new HashMap<String, Object>();
         String body;
         //
         //
@@ -79,31 +71,31 @@ public class VelocityTempleTests extends CamelTestSupport {
         body = "Hello ${headers.name}";
 
         // no mock expectations for setup, other than that we receive a response:
-        //mock.expectedBodiesReceived("Template ttt created: href=http://localhost:2005/templates/ttt" );
+        //mock.expectedBodiesReceived("Template ttt created: href=http://localhost:2005/templates/ttt");
         mock.expectedMessageCount(1);
 
         template.sendBodyAndHeaders("direct:recipientList", body, headers);
         
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
     }
     
     @Override
-    public boolean useJmx() {
+    public final boolean useJmx() {
         return true;
     }
     
     @Test
-    public void test_createTemplate() throws Exception {
+    public final void createTemplate() throws Exception {
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
+        Map<String, Object> headers = new HashMap<String, Object>();
         String body;
         
         //
         // create template:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         headers.put("recipientList", "http://localhost:2005/templates/ttt");
         headers.put("CamelHttpMethod", "POST");
@@ -111,11 +103,12 @@ public class VelocityTempleTests extends CamelTestSupport {
         body = "Hello ${headers.name}";
 
         // mock expectations need to be specified before sending the message:
-        mock.expectedBodiesReceived("Template ttt created: href=http://localhost:2005/templates/ttt" );
+        mock.expectedBodiesReceived("Template ttt created: href=http://localhost:2005/templates/ttt");
         mock.expectedMessageCount(1);
 
         template.sendBodyAndHeaders("direct:recipientList", body, headers);
-        
+
+        // TODO: replace the complicated asserts below by mock.expected configuration BEFORE  the template is sent:
         assertFalse(mock.getExchanges().get(0).getIn().getHeader("CamelHttpResponseCode") == null); 
         assertTrue(mock.getExchanges().get(0).getIn().getHeader("CamelHttpResponseCode").toString().equals("201"));
         assertFalse(mock.getExchanges().get(0).getIn().getHeader("Location") == null); 
@@ -130,7 +123,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // create template a second time:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         headers.put("recipientList", "http://localhost:2005/templates/ttt?throwExceptionOnFailure=false");
         headers.put("CamelHttpMethod", "POST");
@@ -139,7 +132,7 @@ public class VelocityTempleTests extends CamelTestSupport {
 
         // mock expectations need to be specified before sending the message:
         mock.expectedMessageCount(1);
-        mock.expectedBodiesReceived("Template ttt exists already: href=http://localhost:2005/templates/ttt" );
+        mock.expectedBodiesReceived("Template ttt exists already: href=http://localhost:2005/templates/ttt");
         // could be replaced by (AFTER having sent the message!):
 //      assertTrue(mock.getExchanges().get(0).getIn().getBody(String.class).equals("Template ttt exists already: href=http://localhost:2005/templates/ttt"));
 
@@ -148,6 +141,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // for debugging:
         Exchange e0 = mock.getExchanges().get(0);  
 
+        // TODO: replace the complicated asserts below by mock.expected configuration BEFORE  the template is sent:
         assertFalse(mock.getExchanges().get(0).getIn().getHeader("CamelHttpResponseCode") == null); 
         assertTrue(mock.getExchanges().get(0).getIn().getHeader("CamelHttpResponseCode").toString().equals("409"));
         assertFalse(mock.getExchanges().get(0).getIn().getHeader("Location") == null); 
@@ -157,16 +151,16 @@ public class VelocityTempleTests extends CamelTestSupport {
     }
     
     @Test
-    public void test_updateTemplate() throws Exception {
+    public final void updateTemplate() throws Exception {
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
+        Map<String, Object> headers = new HashMap<String, Object>();
         String body;       
         
         //
         // update template ttt to "Hello ${headers.name}":
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // specify input parameters:
         headers.put("recipientList", "http://localhost:2005/templates/ttt");
@@ -190,7 +184,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // update template ttt to "Hello ${headers.name}" a second time:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // specify input parameters:
         headers.put("recipientList", "http://localhost:2005/templates/ttt");
@@ -211,19 +205,19 @@ public class VelocityTempleTests extends CamelTestSupport {
     }
     
     @Test
-    public void test_readTemplate() throws Exception {
+    public final void readTemplate() throws Exception {
     	//
     	// INIT: 
     	//
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
-        String body;
+        Map<String, Object> headers = new HashMap<String, Object>();
+//        String body;
 
         //
         // read template, when it does not exist:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -245,7 +239,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // read template, when it exists:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
      
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -263,19 +257,19 @@ public class VelocityTempleTests extends CamelTestSupport {
     }
     
     @Test
-    public void test_applyTemplate() throws Exception {
+    public final void applyTemplate() throws Exception {
     	//
     	// INIT: 
     	//
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
+        Map<String, Object> headers = new HashMap<String, Object>();
         String body;
 
         //
         // apply template from body:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -296,7 +290,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // apply template from body with a variable that is not defined and resolution=forced
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -319,7 +313,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // apply template, when template does not exist (cached=false; otherwise, we need to restart the routes):
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -339,14 +333,14 @@ public class VelocityTempleTests extends CamelTestSupport {
         // apply template, when template exists and all variables are resolved:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // make sure the resource exists:
         setupCreatedTemplate();   
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
-        mock.expectedBodiesReceived("Hello London" );
+        mock.expectedBodiesReceived("Hello London");
         mock.expectedHeaderReceived("CamelHttpResponseCode", "200");
         mock.expectedHeaderReceived("Location", "http://localhost:2005/templates/ttt/apply");
 
@@ -362,7 +356,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // apply template, when template exists and some variables are not resolved:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -381,7 +375,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // apply template, when template exists and some variables are not resolved and resolution=forced:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
@@ -400,11 +394,11 @@ public class VelocityTempleTests extends CamelTestSupport {
         // apply template, when template exists and all variables are resolved and resolution=forced:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         // expectations need to be defined before sending the message:
         mock.expectedMessageCount(1);
-        mock.expectedBodiesReceived("Hello London" );
+        mock.expectedBodiesReceived("Hello London");
         mock.expectedHeaderReceived("CamelHttpResponseCode", "200");
         mock.expectedHeaderReceived("Location", "http://localhost:2005/templates/ttt/apply");
 
@@ -418,13 +412,13 @@ public class VelocityTempleTests extends CamelTestSupport {
     }
     
     @Test
-    public void test_deleteTemplate() throws Exception {  
+    public final void deleteTemplate() throws Exception {  
     	//
     	// INIT: 
     	//
         MockEndpoint mock = getMockEndpoint("mock:result");
-        Map<String,Object> headers = new HashMap<String,Object>();
-        String body;
+        Map<String, Object> headers = new HashMap<String, Object>();
+//        String body;
         
         // make sure the resource exists:
         setupCreatedTemplate();   
@@ -433,7 +427,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // delete template that exists: expect 204 No Content:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         mock.expectedMessageCount(1);
 //        mock.expectedBodiesReceived("");
@@ -451,7 +445,7 @@ public class VelocityTempleTests extends CamelTestSupport {
         // delete template that does not exist: expect 404 Not Found:
         //
         mock.reset();
-        headers = new HashMap<String,Object>();
+        headers = new HashMap<String, Object>();
         
         mock.expectedMessageCount(1);
         mock.expectedBodiesReceived("404 Not Found: template ttt does not exist");
@@ -472,7 +466,7 @@ public class VelocityTempleTests extends CamelTestSupport {
 
     protected RouteBuilder createRouteBuilder() throws Exception {
         return new RouteBuilder() {
-            public void configure() throws Exception {
+            public final void configure() throws Exception {
             	
         		onException(Exception.class)
 				.setHeader("ResultCode", constant(1))

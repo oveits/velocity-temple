@@ -1,10 +1,7 @@
 package de.oveits.velocitytemple;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
-import org.apache.camel.builder.PredicateBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.properties.PropertiesComponent;
 
 
 /**
@@ -15,9 +12,9 @@ public class MyRouteBuilder extends RouteBuilder {
     /**
      * Let's configure the Camel routing rules using Java code...
      */
-    public void configure() {
+    public final void configure() {
     	
-    	String cached="cached=false";
+//    	String cached = "cached=false";
     	
     	// Standard Exception Handler
 		onException(Exception.class)
@@ -39,8 +36,8 @@ public class MyRouteBuilder extends RouteBuilder {
 		// in our case, we implement a redirect on the root URL:
     	from("jetty:http://0.0.0.0:{{inputport}}/")
 		    .setHeader("Location", simple("${headers.CamelHttpUrl}templates"))
-			.setHeader("CamelHttpResponseCode", constant("301"))		
-			;
+			  .setHeader("CamelHttpResponseCode", constant("301"))		
+			  ;
 		
 
     	// define source interfaces and port:
@@ -106,8 +103,8 @@ public class MyRouteBuilder extends RouteBuilder {
 //		.setHeader("Content-Type", constant("text/html; charset=UTF-8"))
 //		;
 
-	    Boolean allowRoutingSlip=false;	    
-		if(allowRoutingSlip){
+	    Boolean allowRoutingSlip = false;	    
+		if (allowRoutingSlip) {
 			// testing of recursive routingSlip; not yet implemented:
 		    from("jetty:http://0.0.0.0:{{inputport}}/routingSlip/") //?continuationTimeout=3600000")
 				.routeId("routingSlip")
@@ -408,7 +405,7 @@ public class MyRouteBuilder extends RouteBuilder {
 		//
 		// default values:
 		//
-		.choice().when(header("port").isNull()).setHeader("port", constant(22)).end() // choice
+		.choice().when(header("port").isNull()).setHeader("port", simple("{{default.port}}")).end() // choice
 		//
 		// perform SSH:
 		//
@@ -460,7 +457,7 @@ public class MyRouteBuilder extends RouteBuilder {
 		// replacing '\n' by real linebreaks (did not find another way than to perform it with 2 replaceAlls and another replaceAll to retain the '\'):
 		.setBody(simple("${body.replaceAll('\\\\','__NN__').replaceAll('__NN__n','\n').replaceAll('__NN__','\\\\')}"))
 		.setBody(simple("${body.replaceAll('<STDOUT>','headers.STDOUT').replaceAll('<STDIN>','headers.STDIN').replaceAll('<STDERR>','headers.STDERR')}"))
-
+ 
 		// we need to log before removing the headers:
 		.log("direct:ssh: ssh://${headers.username}:${headers.password}@${headers.hostname}:${headers:port} ended")			
 

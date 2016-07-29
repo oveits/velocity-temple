@@ -1,7 +1,6 @@
 package de.oveits.velocitytemple;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.properties.PropertiesComponent;
 
 /**
  * A Camel Java DSL Router
