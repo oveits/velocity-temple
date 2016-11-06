@@ -43,7 +43,7 @@ public class MyRouteBuilder extends RouteBuilder {
     	// define source interfaces and port:
 		restConfiguration().host("0.0.0.0").port("{{inputport}}");
 
-		// define REST service:
+		// define REST service for SSH:
 		rest("/ssh")
 		// Apply Velocity
 			.post()
