@@ -28,27 +28,44 @@ Apply template that is found in the body:
 	Response Codes: 200 OK, if the operation was successful.
 	-> This operation can be used as a stateless microservice.
 	Optional parameter: resolution=forced (default: undefined/null). Will cause an exit code 404 (Header) not found, if one of the variables in the template could not be resolved; i.e. if there is variable in the body that is missing in the header. 
-	
-Apply template named "mytemplate":
-	send a POST to http://<server>:<port>/templates/mytemplate/apply with the variables in the header.
-	Response Codes: 200 OK, if the operation was successful; 404 Not Found, if the template does not exist. The resource is not changed.
-	
-Create a template named "mytemplate": 
-	send a POST to http://<server>:<port>/templates/mytemplate with the template content in the HTTP body.
-	Response Codes: 201, if successfully created; 409, if it exists already.
-	Optional parameter: resolution=forced (default: undefined/null). Will cause an exit code 404 (Header) Not Found, if one of the variables in the template could not be resolved; i.e. if there is variable in the template file that is missing in the header. 
 
-Read template named "mytemplate": 
-	send a GET to http://<server>:<port>/templates/mytemplate. The template will be received in the body.
+        example:  `curl -X POST -D - -H "Content-Type: text" -d 'Hello ${headers.name}' -H 'name: world' localhost:2005/templates/apply`
+        response: 200 OK + Headers + Body: `Hello world`
+	
+Create a template named "hello": 
+	send a POST to http://<server>:<port>/templates/hello with the template content in the HTTP body.
+	Response Codes: 201, if successfully created; 409, if it exists already.
+
+        example:  `curl -X POST -D - -H "Content-Type: text" -d 'Hello ${headers.name}' localhost:2005/templates/hello`
+        response: 201 Created + Headers + Body: "Template hello created: href=http://localhost:2005/templates/hello"
+
+Apply template named "hello":
+	send a GET to http://<server>:<port>/templates/hello/apply with the variables in the header.
+	Response Codes: 200 OK, if the operation was successful; 404 Not Found, if the template does not exist. The resource is not changed.
+
+        example:  `curl -X GET -D - -H "name: world" localhost:2005/templates/hello/apply`
+        response: 200 OK + Headers + Body: "Hello world"
+	
+Read template named "hello": 
+	send a GET to http://<server>:<port>/templates/hello. The template will be received in the body.
 	Response Codes: 200 OK, if it was read successfully; 404, if it was not found.
+
+        example:  `curl -X GET -D - localhost:2005/templates/hello`
+        response: 200 OK + Headers + Body: "Hello ${headers.name}"
 
 Update template named "mytemplate": 
 	send a PUT to http://<server>:<port>/templates/mytemplate with the new template content in the HTTP body.
 	Response Codes: 201 OK, if it was created; 200 OK, if it was updated successfully
 
+        example:  `curl -X PUT -D - -H "Content-Type: text" -d 'Hello changed ${headers.name}' localhost:2005/templates/hello`
+        response: 201 Created + Headers + Body: "Template hello updated: href=http://localhost:2005/templates/hello"
+
 Delete template named "mytemplate":
 	send a DELETE to http://<server>:<port>/templates/mytemplate
 	Response Codes: 204 No Content with empty body, if it was Deleted successfully. 404 Not Found, if the template does not exist.
+
+        example:  `curl -X DELETE -D - localhost:2005/templates/hello`
+        response: 204 No Content
 
     
 How to perform Performance Monitoring:
